@@ -1,0 +1,13 @@
+List View Need to Create :
+
+1. Main Page
+2. Login Page
+3. Sign Up Page
+
+4. List Stuff each category Page
+5. Detail Stuff Page
+6. Purchase Page
+
+7. Edit account
+8. Add Stuff
+9. Search Page
