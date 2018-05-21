@@ -12,7 +12,7 @@ class User extends Authenticatable
     protected $guard = 'user';
 
     protected $fillable = [
-        'user_name', 'password',
+        'user_name', 'user_email','user_password',
     ];
 
     protected $hidden = [
@@ -20,6 +20,6 @@ class User extends Authenticatable
     ];
 
     public function profile(){
-        return $this->hasOne('Xmarket\Profile');
+        return $this->hasOne('Xmarket\Profile','user_name','user_name');
     }
 }

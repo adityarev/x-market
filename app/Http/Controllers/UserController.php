@@ -2,7 +2,9 @@
 
 use Illuminate\Http\Request as Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 use Xmarket\User as User;
+use Xmarket\Profile;
 use Xmarket\Http\Controllers\Controller;
 
 class UserController extends Controller {
@@ -21,9 +23,7 @@ class UserController extends Controller {
         if ($login = Auth::guard('user')->attempt($credentials)){
             $email = $request->only('email')['email'];
             $user = User::where('email','=',$email)->first();
-            //echo $user->name;
             $request->session()->put('user', $user);
-            //print_r($request->session()->get('user'));
             echo $request->session()->get('user')->name;
         } else 
             echo 'gagal';
@@ -39,6 +39,30 @@ class UserController extends Controller {
     }
 
     public function register(){
-        echo 'Register';
+        return view('users.register');
+    }
+
+    public function store(){
+        Input::merge(['user_password' => bcrypt(Input::get('user_password'))]);
+        User::create(Input::all());
+        Profile::create(['user_name' => Input::get('user_name')]);
+        return redirect('welcome');
+    }
+
+    public function profileShow($username){
+        $profile = Profile::where('user_name',$username)->first();
+        echo $profile->user_fullname;
+    }
+
+    public function profileEdit($username){
+        $profile = Profile::where('user_name',$username)->first();
+        return view('profiles.edit')->with('profile', $profile);
+    }
+
+    public function profileUpdate($username){
+        $profile = Profile::where('user_name',$username)->first();        
+        $profile->update(Input::all());
+
+        return redirect('users/'.$username);
     }
 }
