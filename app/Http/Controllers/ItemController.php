@@ -19,7 +19,8 @@ class ItemController extends Controller
         $tmp = str_replace("_"," ",$itemname);
         $user = User::where('user_name',$username)->first();
         $item = $user->item->where('item_name',$tmp)->first();
-        echo $item->item_name;
+        
+        return view('items.show')->with('user',$user)->with('item',$item);
     }
 
     public function create($username){
