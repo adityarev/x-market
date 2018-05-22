@@ -29,7 +29,14 @@ Route::put('users/{username}', 'UserController@profileUpdate');
 Route::get('users/{username}', 'UserController@profileShow');
 Route::get('users/{username}/edit', 'UserController@profileEdit');
 
+Route::get('items/{username}/create', 'ItemController@create');
+Route::post('items/{username}', 'ItemController@store');
+Route::get('items/{username}/{itemname}/edit', 'ItemController@edit');
+Route::put('items/{username}/{itemname}', 'ItemController@update');
+Route::get('items/{username}/{itemname}/delete', 'ItemController@delete');
+Route::delete('items/{username}/{itemname}', 'ItemController@destroy');
 Route::get('items/{username}', 'ItemController@index');
+Route::get('items/{username}/{itemname}', 'ItemController@show');
 
 Auth::routes();
 
