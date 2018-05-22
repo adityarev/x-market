@@ -22,4 +22,8 @@ class User extends Authenticatable
     public function profile(){
         return $this->hasOne('Xmarket\Profile','user_name','user_name');
     }
+
+    public function item(){
+        return $this->hasMany('Xmarket\Item','item_seller','user_name');
+    }
 }

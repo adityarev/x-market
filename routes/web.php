@@ -28,6 +28,9 @@ Route::post('users/register', 'UserController@store');
 Route::put('users/{username}', 'UserController@profileUpdate');
 Route::get('users/{username}', 'UserController@profileShow');
 Route::get('users/{username}/edit', 'UserController@profileEdit');
+
+Route::get('items/{username}', 'ItemController@index');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
