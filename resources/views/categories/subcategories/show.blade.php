@@ -70,6 +70,8 @@
 <script>
     $(document).ready(function () {
         $(".panel .panel-default").mouseenter(function () {
+            $(this).removeClass('panel-default', {duration: 125}).addClass('panel-primary', {duration: 125});
+
             $('#item').animate({
                 opacity: "1.0"
             }, 250);
@@ -77,6 +79,8 @@
             $('#item').animate({
                 opacity: "0.4"
             }, 250);
+
+            $(this).removeClass('panel-primary', {duration: 125}).addClass('panel-default', {duration: 125});
         });
     });
 </script>
