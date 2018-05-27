@@ -9,6 +9,8 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    protected $timestamps = false;
+
     protected $guard = 'user';
 
     protected $fillable = [
