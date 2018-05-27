@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Input;
 use Xmarket\User as User;
 use Xmarket\Profile;
 use Xmarket\Http\Controllers\Controller;
+use Xmarket\Category;
 
 class UserController extends Controller {
 
@@ -51,7 +52,8 @@ class UserController extends Controller {
 
     public function profileShow($username){
         $profile = Profile::where('user_name',$username)->first();
-        echo $profile->user_fullname;
+        $categories = Category::all();
+        return view('profiles.show')->with('profile',$profile)->with('categories',$categories);
     }
 
     public function profileEdit($username){

@@ -16,9 +16,7 @@ Route::get('welcome', function () {
     return view('index');
 });
 
-Route::get('test', function () {
-    return view('test');
-});
+Route::get('test', 'CategoryController@index');
 
 Route::get('users', 'UserController@index');
 Route::get('users/login', 'UserController@loginPage');

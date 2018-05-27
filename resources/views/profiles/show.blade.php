@@ -1,3 +1,5 @@
+@extends('layouts.master')
+@section('content')
 <style>
     .user-row {
         margin-bottom: 14px;
@@ -129,3 +131,4 @@
         });
     });
 </script>
+@stop
