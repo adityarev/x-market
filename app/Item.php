@@ -15,4 +15,8 @@ class Item extends Model
     public function user(){
         return $this->belongsTo('Xmarket\User','item_seller');
     }
+
+    public function subCategories(){
+        return $this->belongsToMany('Xmarket\SubCategory');
+    }
 }

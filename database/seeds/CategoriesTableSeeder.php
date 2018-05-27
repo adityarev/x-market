@@ -31,11 +31,6 @@ class CategoriesTableSeeder extends Seeder
         Category::create([
             'id' => 4,
             'category_name' => 'Entertainment',
-        ]);
-
-        Category::create([
-            'id' => 5,
-            'category_name' => 'Productivity',
-        ]);
+        ]);       
     }
 }

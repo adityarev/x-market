@@ -9,7 +9,7 @@ class Category extends Model
     //
     public $timestamps = false;
 
-    public function subCategory(){
+    public function subCategories(){
         return $this->hasMany('Xmarket\SubCategory');
     }
 }

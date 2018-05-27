@@ -9,15 +9,19 @@ class CategoryController extends Controller
 {
     public function index(){
         $categories = Category::all();
+        
+        return view('categories.index')->with('categories',$categories);
+    }
 
-        //echo $categories->category_name;
+    public function show($categoryName){
+        $category = Category::where('category_name','=',$categoryName)->first();
 
-        foreach ($categories as $category){
-            echo $category->category_name."<br>";
-            foreach ($category->subCategory as $subCategory){
-                echo $subCategory->sub_category_name;
-            }            
-        }
-        //return view('test');
+        return view('categories.show')->with('category',$category);
+    }
+
+    public function subCategoryShow($categoryName,$subCategoryName){
+        $category = Category::where('category_name','=',$categoryName)->first();
+        $subCategory = $category->subCategories->where('sub_category_name','=',$subCategoryName);
+        $items  = $subCategory->items->all();
     }
 }

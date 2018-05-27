@@ -41,14 +41,12 @@
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><strong>Category Name</strong></h3>
+                    <h3 class="panel-title"><strong>{{ $category->category_name }}</strong></h3>
                 </div>
                 <ul class="list-group">
-                    <a href="#" class="list-group-item">Subcategory 1</a>
-                    <a href="#" class="list-group-item">Subcategory 2</a>
-                    <a href="#" class="list-group-item">Subcategory 3</a>
-                    <a href="#" class="list-group-item">Subcategory 4</a>
-                    <a href="#" class="list-group-item">Subcategory 5</a>
+                    @foreach ($category->subCategories as $subCategory)                    
+                        <a href="#" class="list-group-item">{{$subCategory->sub_category_name}}</a>                    
+                    @endforeach
                 </ul>
             </div>
         </div>
