@@ -28,7 +28,7 @@
                     <ul class="dropdown-menu">
                         @foreach($categories as $category)                        
                         <li class="dropdown-submenu">
-                            <a class="category" tabindex="-1" href="{{ url('category/'.$category->category_name) }}"> {{ $category->category_name }} <span class="glyphicon glyphicon-menu-right"></span></a>
+                            <a class="category" tabindex="-1" href="{{ url('category/'.$category->category_name) }}"> {{ $category->category_name }} <span class="glyphicon glyphicon-menu-right" style="float: right;"></span></a>
                             <ul class="dropdown-menu">
                                 @foreach($category->subCategories as $subCategory)
                                     <li><a tabindex="-1" href="{{ url('category/'.$category->category_name.'/'.$subCategory->sub_category_name) }}"> {{ $subCategory->sub_category_name }} </a></li>

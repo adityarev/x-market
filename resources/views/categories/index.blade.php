@@ -1,3 +1,5 @@
+@extends('layouts.master')
+@section('content')
 <style>
     .table-category-information > tbody > tr {
         border-top: 1px solid rgb(221, 221, 221);
@@ -52,3 +54,4 @@
         </div>
     </div>
 </div>
+@stop
