@@ -12,7 +12,7 @@
 <body>
 
 @include('layouts.navbar')
-@include('contents.profile')
+@include('profiles.show')
 
 </body>
 </html>
