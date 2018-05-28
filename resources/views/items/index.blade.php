@@ -35,11 +35,37 @@
                                                         <span class="glyphicon glyphicon-pencil" style="margin-right: 5px;"></span>Edit
                                                     </button>
                                                 </a>
-                                                <a href="{{ url('items/'.$item->user->username.'/'.$item->item_name.'/delete') }}">
-                                                    <button class="btn btn-danger col-md-12 col-lg-12" style="margin-top: 15px">
-                                                        <span class="glyphicon glyphicon-remove-circle" style="margin-right: 5px;"></span>Delete
-                                                    </button>
-                                                </a>
+
+                                                <button class="btn btn-danger col-md-12 col-lg-12" id="delete-btn-{{ $item->id }}" style="margin-top: 15px">
+                                                    <span class="glyphicon glyphicon-remove-circle" style="margin-right: 5px;"></span>Delete
+                                                </button>
+
+                                                <!-- Delete Modal -->
+                                                <div class="modal fade" id="delete-modal-{{ $item->id }}" role="dialog">
+                                                    <div class="modal-dialog">
+
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content">
+                                                            <div class="modal-header" style="padding:35px 50px;">
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                <h4><span class="glyphicon glyphicon-warning-sign"></span> Warning!</h4>
+                                                            </div>
+                                                            <div class="modal-body" style="padding:40px 50px;">
+                                                                <h5>This item would be delete permanently. Are you sure ?</h5>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <a href="{{ url('items/'.$item->user->username.'/'.$item->item_name.'/delete') }}">
+                                                                    <button class="btn btn-danger btn-default">
+                                                                        <span class="glyphicon glyphicon-trash"></span> Yes
+                                                                    </button>
+                                                                </a>
+                                                                <button type="submit" class="btn btn-success" data-dismiss="modal">
+                                                                    <span class="glyphicon glyphicon-remove"></span> No
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                             @endif
                                         </div>
@@ -50,7 +76,7 @@
                     </div>
                     <div class="panel-footer" style="overflow: auto">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
-                            <a href="#">
+                            <a href=" {{ url('items/'.$item->user->username.'/create') }} ">
                                 <button class="btn btn-primary pull-right">
                                     <span class="glyphicon glyphicon-plus" style="margin-right: 5px"></span>Add
                                 </button>
@@ -77,6 +103,13 @@
 
                 $(this).removeClass('panel-primary', {duration: 125}).addClass('panel-default', {duration: 125});
             });
+
+            @foreach($items as $item)
+                $("#delete-btn-{{ $item->id }}").click(function(){
+                    console.log('jancok');
+                    $("#delete-modal-{{ $item->id }}").modal();
+                });
+            @endforeach
         });
     </script>
 @stop
