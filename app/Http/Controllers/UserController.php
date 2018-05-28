@@ -61,9 +61,8 @@ class UserController extends BaseController {
     }
 
     public function profileShow($username){
-        $profile = Profile::where('username',$username)->first();
-        $categories = Category::all();
-        return view('profiles.show')->with('profile',$profile)->with('categories',$categories);
+        $user = User::where('username',$username)->first();        
+        return view('profiles.show')->with('user',$user);
     }
 
     public function profileEdit($username){
@@ -71,7 +70,7 @@ class UserController extends BaseController {
         return view('profiles.edit')->with('profile', $profile);
     }
 
-    public function profileUpdate($username){
+    public function profileUpdate($username){        
         $profile = Profile::where('username',$username)->first();        
         $profile->update(Input::all());
 

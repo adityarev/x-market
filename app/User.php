@@ -22,7 +22,7 @@ class User extends Authenticatable
     ];
 
     public function profile(){
-        return $this->hasOne('Xmarket\Profile','user_name','username');
+        return $this->hasOne('Xmarket\Profile','username','username');
     }
 
     public function item(){
