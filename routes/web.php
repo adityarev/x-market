@@ -10,7 +10,7 @@
 |
 */
 Route::get('/', function () {
-    return redirect('welcome');
+    return redirect('category');
 });
 Route::get('welcome', function () {
     return view('index');

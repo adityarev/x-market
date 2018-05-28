@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Carbon;
 
 class CreateProfilesTable extends Migration
 {
@@ -20,7 +21,9 @@ class CreateProfilesTable extends Migration
             $table->string('user_city',30)->default('Insert The City you live in');
             $table->string('user_address',30)->default('Insert Your Address');
             $table->string('user_description',255)->default('Insert Your Description');
-            $table->string('user_phone_number',255)->default('Insert Your Description');
+            $table->string('user_phone_number',255)->default('Insert Your Phone Number');            
+            $table->integer('user_gender')->default(0);
+            $table->date('user_date_of_birth')->default(Carbon::parse('first day of January 1945'));
             $table->timestamps();
         });
     }

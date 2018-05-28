@@ -1,8 +1,5 @@
 @extends('layouts.master')
 @section('content')
-{{--{!! Form::model($profile, ['url' => '/users/'.$profile->user_name, 'method' => 'put']) !!}--}}
-    {{--@include('partials.forms.profile')--}}
-{{--{!! Form::close() !!}--}}
 
 <style>
     .user-row {
@@ -55,8 +52,11 @@
                         <div class="col-md-12">
                             <form class="form-horizontal">
                                 <fieldset>
+                                {!! Form::model($profile, ['url' => '/users/'.$profile->user_name, 'method' => 'put']) !!}
+                                    @include('partials.forms.profile')
+                                {!! Form::close() !!}
                                     <!-- Text input-->
-                                    <div class="form-group">
+                                    <!--<div class="form-group">
                                         <label class="col-md-4 control-label" for="Username">Username</label>
                                         <div class="col-md-6">
                                             <div class="input-group">
@@ -69,7 +69,7 @@
                                     </div>
 
                                     <!-- Text input-->
-                                    <div class="form-group">
+                                    <!--<div class="form-group">
                                         <label class="col-md-4 control-label" for="Name (Full name)">Name (Full name)</label>
                                         <div class="col-md-6">
                                             <div class="input-group">
@@ -82,7 +82,7 @@
                                     </div>
 
                                     <!-- File Button -->
-                                    <div class="form-group">
+                                    <!--<div class="form-group">
                                         <label class="col-md-4 control-label" for="Upload photo">Upload photo</label>
                                         <div class="col-md-6">
                                             <input id="photo" name="photo" class="input-file" type="file">
@@ -90,7 +90,7 @@
                                     </div>
 
                                     <!-- Text input-->
-                                    <div class="form-group">
+                                    <!--<div class="form-group">
                                         <label class="col-md-4 control-label" for="Date Of Birth">Date Of Birth</label>
                                         <div class="col-md-6">
                                             <div class="input-group">
@@ -104,7 +104,7 @@
                                     </div>
 
                                     <!-- Multiple Radios (inline) -->
-                                    <div class="form-group">
+                                    <!--<div class="form-group">
                                         <label class="col-md-4 control-label" for="Gender">Gender</label>
                                         <div class="col-md-6">
                                             <label class="radio-inline" for="Gender-0">
@@ -119,7 +119,7 @@
                                     </div>
 
                                     <!-- Text input-->
-                                    <div class="form-group">
+                                    <!--<div class="form-group">
                                         <label class="col-md-4 control-label col-xs-12" for="Address">Address</label>
                                         <div class="col-md-6">
                                             <div class="input-group">
@@ -132,7 +132,7 @@
                                     </div>
 
                                     <!-- Text input-->
-                                    <div class="form-group">
+                                    <!--<div class="form-group">
                                         <label class="col-md-4 control-label" for="Phone number ">Phone number </label>
                                         <div class="col-md-6">
                                             <div class="input-group">
@@ -145,7 +145,7 @@
                                     </div>
 
                                     <!-- Text input-->
-                                    <div class="form-group">
+                                    <!--<div class="form-group">
                                         <label class="col-md-4 control-label" for="Email Address">Email Address</label>
                                         <div class="col-md-6">
                                             <div class="input-group">
@@ -158,7 +158,7 @@
                                     </div>
 
                                     <!-- Textarea -->
-                                    <div class="form-group">
+                                    <!--<div class="form-group">
                                         <label class="col-md-4 control-label" for="About Me">About Me</label>
                                         <div class="col-md-6">
                                             <textarea class="form-control" rows="10"  id="about-me" name="about-me" placeholder="About Me"></textarea>
@@ -171,7 +171,7 @@
                                             <a href="#" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Submit</a>
                                             <a href="#" class="btn btn-danger" value=""><span class="glyphicon glyphicon-remove-sign"></span> Clear</a>
                                         </div>
-                                    </div>
+                                    </div>-->
                                 </fieldset>
                             </form>
                         </div>
