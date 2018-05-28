@@ -48,6 +48,15 @@
                             @endforeach
                         </div>
                     </div>
+                    <div class="panel-footer" style="overflow: auto">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+                            <a href="#">
+                                <button class="btn btn-primary pull-right">
+                                    <span class="glyphicon glyphicon-plus" style="margin-right: 5px"></span>Add
+                                </button>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -17,13 +17,14 @@ class CreateProfilesTable extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('username');
-            $table->string('user_fullname',30)->default('');
-            $table->string('user_city',30)->default('');
-            $table->string('user_address',30)->default('');
-            $table->string('user_description',255)->default('');
-            $table->string('user_phone_number',255)->default('');            
-            $table->integer('user_gender')->default(0);
-            $table->date('user_date_of_birth')->default(Carbon::parse('first day of January 1945'));
+            $table->string('user_profile_pict',255)->nullable();
+            $table->string('user_fullname',30)->nullable();
+            $table->string('user_city',30)->nullable();
+            $table->string('user_address',30)->nullable();
+            $table->string('user_description',255)->nullable();
+            $table->string('user_phone_number',255)->nullable();            
+            $table->integer('user_gender')->nullable();
+            $table->date('user_date_of_birth')->nullable();
             $table->timestamps();
         });
     }

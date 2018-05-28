@@ -1,14 +1,19 @@
 <?php namespace Xmarket\Http\Controllers;
 
-use Illuminate\Http\Request as Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Input;
-use Xmarket\User as User;
+use Xmarket\User;
 use Xmarket\Profile;
 use Xmarket\Http\Controllers\Controller;
 use Xmarket\Category;
 use Xmarket\Notification;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Response;
+
 use Session;
+use Image;
+use Storage;
 
 class UserController extends BaseController {
     
@@ -70,10 +75,34 @@ class UserController extends BaseController {
         return view('profiles.edit')->with('profile', $profile);
     }
 
-    public function profileUpdate($username){        
-        $profile = Profile::where('username',$username)->first();        
-        $profile->update(Input::all());
+    public function profileUpdate(Request $request){        
+        $profile = Profile::where('username',Session::get('user')->username)->first();
+        
+        if ($request->file('user_profile_pict')!=null){            
+            $path = Storage::putFile('public', $request->file('user_profile_pict'));
+            $targetPath = date('Y-m-d-H-m-s').'-'.$request->file('user_profile_pict')->getClientOriginalName();
+            $oldfile = $profile->user_profile_pict;
+            if($oldfile != null){                
+                Storage::delete('public/user_profile_picts/'.$oldfile);
+            }
+            Storage::move($path,'public/user_profile_picts/'.$targetPath);
+            Input::merge(['user_profile_pict' => $targetPath]);
+        } else {            
+            Input::merge(['user_profile_pict' => $user->profile->user_profile_pict]);
+        }
+        /*echo Input::get('user_profile_pict')."<br>";
+        print_r(Input::all());*/
 
-        return redirect('users/'.$username);
+        $profile->update([            
+            'user_profile_pict'=>Input::get('user_profile_pict'),
+            'user_fullname'=>Input::get('user_fullname'),
+            'user_city'=>Input::get('user_city'),
+            'user_address'=>Input::get('user_address'),
+            'user_description'=>Input::get('user_description'),
+            'user_phone_number'=>Input::get('user_phone_number'),
+            'user_date_of_birth'=>Input::get('user_date_of_birth'),
+        ]);
+
+        return redirect('users/'.Session::get('user')->username);
     }
 }

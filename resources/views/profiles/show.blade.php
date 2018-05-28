@@ -45,7 +45,11 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-3 col-lg-3 " align="center">
-                            <img alt="User Pic" src="https://i.scdn.co/image/6a38b5c1fabb83ba5db7ff3dfe99da2150af26e3" class="img-circle img-responsive">
+                            @if($user->profile->user_profile_pict!=null)
+                                <img alt="User Pic" src="{{ asset('storage/user_profile_picts/'.$user->profile->user_profile_pict) }}" class="img-circle img-responsive">
+                            @else
+                                <img alt="User Pic" src="https://i.scdn.co/image/6a38b5c1fabb83ba5db7ff3dfe99da2150af26e3" class="img-circle img-responsive">
+                            @endif
                         </div>
 
                         <div class=" col-md-9 col-lg-9 ">

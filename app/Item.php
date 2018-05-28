@@ -19,4 +19,8 @@ class Item extends Model
     public function subCategories(){
         return $this->belongsToMany('Xmarket\SubCategory');
     }
+
+    public function images(){
+        return $this->hasMany('Xmarket\Image');
+    }
 }
