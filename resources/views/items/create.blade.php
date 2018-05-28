@@ -59,6 +59,25 @@
                                         </div>
                                     </div>
 
+                                    <!-- Select input-->
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="Sub Category">Sub Category</label>
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-chevron-right"></i>
+                                                </div>
+                                                <select id="subcategory" name="subcategory" class="form-control selectpicker">
+                                                    <option value="0">-</option>
+                                                    <option value="1">Kesehatan</option>
+                                                    <option value="2">Sekolah</option>
+                                                    <option value="3">Game</option>
+                                                    <option value="4">Fashion</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <!-- Textarea -->
                                     <div class="form-group">
                                         <label class="col-md-4 control-label" for="Description">Description</label>
