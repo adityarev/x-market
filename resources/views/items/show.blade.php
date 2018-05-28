@@ -48,7 +48,7 @@
                             </table>
                         </div>
                     </div>
-                    @if (Session::has('user') && Session::get('user')->username == $user->username)
+                    @if (Auth::check() && Auth::user()->username == $user->username)
                         <div class="row">
                             <div class="col-md-3 col-lg-3"></div>
                             <div class="col-md-9 col-lg-9">

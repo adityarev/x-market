@@ -31,70 +31,11 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <form class="form-horizontal">
-                                <fieldset>
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label" for="Item Name">Item Name</label>
-                                        <div class="col-md-6">
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-font"></i>
-                                                </div>
-                                                <input id="item-name" name="item-name" type="text" placeholder="Item Name" class="form-control input-md">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label" for="Price">Price</label>
-                                        <div class="col-md-6">
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-dollar"></i>
-                                                </div>
-                                                <input id="price" name="price" type="text" placeholder="Price" class="form-control input-md">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Select input-->
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label" for="Sub Category">Sub Category</label>
-                                        <div class="col-md-6">
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-chevron-right"></i>
-                                                </div>
-                                                <select id="subcategory" name="subcategory" class="form-control selectpicker">
-                                                    <option value="0">-</option>
-                                                    <option value="1">Kesehatan</option>
-                                                    <option value="2">Sekolah</option>
-                                                    <option value="3">Game</option>
-                                                    <option value="4">Fashion</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Textarea -->
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label" for="Description">Description</label>
-                                        <div class="col-md-6">
-                                            <textarea class="form-control" rows="10"  id="description" name="description" placeholder="Description"></textarea>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label" ></label>
-                                        <div class="col-md-6">
-                                            <a href="#" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Add</a>
-                                            <a href="#" class="btn btn-danger" value=""><span class="glyphicon glyphicon-remove-sign"></span> Cancel</a>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </form>
+                        {!! Form::open(['url' => '/items/'.Auth::user()->username, 'class' => 'form-horizontal']) !!}
+                            <fieldset>
+                                @include('partials.forms.item')                                    
+                            </fieldset>
+                        {!! Form::close() !!}
                         </div>
                     </div>
                 </div>

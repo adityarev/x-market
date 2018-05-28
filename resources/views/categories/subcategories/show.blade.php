@@ -11,11 +11,12 @@
         <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-xs-offset-0 col-sm-offset-0 col-md-offset-1 col-lg-offset-1 toppad" >
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><strong>SubCategory Name</strong></h3>
+                    <h3 class="panel-title"><strong>{{ $subCategory->sub_category_name }}</strong></h3>
                 </div>
                 <div class="panel-body">
                     <div class="row">
                         @foreach($subCategory->items as $item)
+                            <a href="{{ url('items/'.$item->user->username.'/'.$item->item_name) }}">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 toppad" >
                                 <div class="panel panel-default">
                                     <div class="panel-body">
@@ -31,6 +32,7 @@
                                     </div>
                                 </div>
                             </div>
+                            </a>
                         @endforeach
                     </div>
                 </div>

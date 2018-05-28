@@ -3,9 +3,16 @@
 namespace Xmarket\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Response;
+
 use Xmarket\User;
 use Xmarket\Item;
+
+use Session;
+use Image;
+use Storage;
 
 class ItemController extends BaseController
 {
@@ -29,17 +36,15 @@ class ItemController extends BaseController
         return view('items.create');
     }
 
-    public function store($username){
-        $user = User::where('username',$username)->first();
-
+    public function store($username){                
         Item::create([
-            'item_seller'       => $user->username,
+            'item_seller'       => Auth::user()->username,
             'item_name'         => Input::get('item_name'),
             'item_description'  => Input::get('item_description'),
             'item_price' => Input::get('item_price'),
         ]);
 
-        return redirect('items/'.$user->username);
+        return redirect('items/'.$username);
     }
 
     public function edit($username, $itemname){        
