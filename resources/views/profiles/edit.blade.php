@@ -50,7 +50,7 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            {!! Form::model($profile, ['url' => '/users/'.$profile->username, 'method' => 'put', 'class' => 'form-horizontal']) !!}
+                            {!! Form::model($profile, ['url' => '/users/'.$profile->username, 'method' => 'put', 'files'=>true , 'class' => 'form-horizontal']) !!}
                             <!--<form class="form-horizontal">-->
                                 <fieldset>                                
                                     @include('partials.forms.profile')                                                                    

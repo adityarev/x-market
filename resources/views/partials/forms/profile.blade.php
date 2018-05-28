@@ -29,7 +29,7 @@
 <div class="form-group">
     <label class="col-md-4 control-label" for="Upload photo">Upload photo</label>
     <div class="col-md-6">
-        <input id="photo" name="photo" class="input-file" type="file">
+        {!! Form::file('user_profile_pict') !!}
     </div>
 </div>
 

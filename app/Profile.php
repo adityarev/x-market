@@ -10,6 +10,7 @@ class Profile extends Model
     
     protected $fillable = [
         'username',
+        'user_profile_pict',
         'user_fullname',
         'user_city',
         'user_address',
@@ -19,6 +20,6 @@ class Profile extends Model
     ];
 
     public function user(){
-        return $this->belongsTo('Xmarket\User');
+        return $this->belongsTo('Xmarket\User','username','username');
     }
 }
