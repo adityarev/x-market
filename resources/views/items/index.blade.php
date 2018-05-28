@@ -26,6 +26,7 @@
                                                 <h4>{{$item->item_name}}</h4>
                                                 <span class="fa fa-dollar" style="margin-right: 5px"></span>{{ $item->item_price }}
                                             </div>
+                                            @if(Session::has('user') && Session::get('user')->username == $user->username)
                                             <div class="col-md-3 col-lg-3" style="padding: 0px;">
                                                 <a href="{{ url('items/'.$item->user->username.'/'.$item->item_name.'/edit') }}">
                                                     <button class="btn btn-warning col-md-12 col-lg-12" style="margin-top: 15px">
@@ -38,6 +39,7 @@
                                                     </button>
                                                 </a>
                                             </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
