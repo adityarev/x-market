@@ -14,7 +14,8 @@ class ItemsTableSeeder extends Seeder
     {
         //
         Item::create([
-            'item_seller'       => 'scott',
+            'sub_category_id'   => 1,
+            'item_seller'       => 'scott',            
             'item_name'         => 'Scott\'s Item 1',
             'item_description'  => 'Scott\'s First Item',
             'item_price' => 100000,
@@ -22,6 +23,7 @@ class ItemsTableSeeder extends Seeder
         ]);
 
         Item::create([
+            'sub_category_id'   => 2,
             'item_seller'       => 'scott',
             'item_name'         => 'Scott\'s Item 2',
             'item_description'  => 'Scott\'s Second Item',
@@ -30,6 +32,7 @@ class ItemsTableSeeder extends Seeder
         ]);
 
         Item::create([
+            'sub_category_id'   => 3,
             'item_seller'       => 'scott',
             'item_name'         => 'Scott\'s Item 3',
             'item_description'  => 'Scott\'s Third Item',
@@ -38,6 +41,7 @@ class ItemsTableSeeder extends Seeder
         ]);
 
         Item::create([
+            'sub_category_id'   => 4,
             'item_seller'       => 'scott',
             'item_name'         => 'Scott\'s Item 4',
             'item_description'  => 'Scott\'s Fourth Item',

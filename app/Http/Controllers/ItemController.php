@@ -36,9 +36,10 @@ class ItemController extends BaseController
         return view('items.create');
     }
 
-    public function store($username){                
+    public function store($username){                                
         Item::create([
             'item_seller'       => Auth::user()->username,
+            'sub_category_id'   => Input::get('sub_category_id'),
             'item_name'         => Input::get('item_name'),
             'item_description'  => Input::get('item_description'),
             'item_price' => Input::get('item_price'),
@@ -61,6 +62,7 @@ class ItemController extends BaseController
 
         $item->update([
             'item_name'         => Input::get('item_name'),
+            'sub_category_id'   => Input::get('sub_category_id'),
             'item_description'  => Input::get('item_description'),
             'item_price' => Input::get('item_price'),
         ]);

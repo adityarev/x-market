@@ -31,7 +31,7 @@
             <div class="input-group-addon">
                 <i class="fa fa-chevron-right"></i>
             </div>
-            <select id="subcategory" name="sub_category_name" class="form-control selectpicker">
+            <select id="subcategory" name="sub_category_id" class="form-control selectpicker">
                 @foreach($categories as $category)
                     @foreach($category->subCategories as $subCategory)
                         <option value="{{$subCategory->id}}">{{$subCategory->sub_category_name}} </option>

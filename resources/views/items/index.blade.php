@@ -59,9 +59,8 @@
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <a href="{{ url('items/'.$item->user->username.'/'.$item->item_name.'/delete') }}" data-method="delete">
-                                                                        <button class="btn btn-danger btn-default">
-                                                                            <span class="glyphicon glyphicon-trash"></span>
-                                                                            {!! Form::submit('Yes') !!}
+                                                                        <button type="submit" class="btn btn-danger btn-default">
+                                                                            <span class="glyphicon glyphicon-trash"></span>Yes                                                                            
                                                                         </button>
                                                                     </a>
                                                                     <button type="submit" class="btn btn-success" data-dismiss="modal">

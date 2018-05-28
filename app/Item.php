@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Item extends Model
 {    
     protected $fillable = [
+        'sub_category_id',
         'item_seller',
         'item_name',
         'item_price',
@@ -18,10 +19,10 @@ class Item extends Model
     }
 
     public function subCategories(){
-        return $this->belongsToMany('Xmarket\SubCategory');
+        return $this->belongsTo('Xmarket\SubCategory');
     }
 
     public function images(){
-        return $this->hasMany('Xmarket\Image');
+        return $this->hasMany('Xmarket\ItemImage');
     }
 }
