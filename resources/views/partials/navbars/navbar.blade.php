@@ -62,10 +62,10 @@
                                 <h4><span class="glyphicon glyphicon-plus-sign"></span> Sign Up</h4>
                             </div>
                             <div class="modal-body" style="padding:40px 50px;">
-                                <form role="form">
+                                {!! Form::open(['url' => '/users/register']) !!}
                                     <div class="form-group">
                                         <label for="username"><span class="glyphicon glyphicon-user"></span> Username</label>
-                                        <input type="text" class="form-control" id="email" name="email" placeholder="Enter username">
+                                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
                                     </div>
                                     <div class="form-group">
                                         <label for="username"><span class="glyphicon glyphicon-envelope"></span> Email</label>
@@ -76,7 +76,7 @@
                                         <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
                                     </div>
                                     <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-plus"></span> Sign Up</button>
-                                </form>
+                                {!! Form::close() !!}
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
@@ -99,10 +99,10 @@
                                 <h4><span class="glyphicon glyphicon-lock"></span> Login</h4>
                             </div>
                             <div class="modal-body" style="padding:40px 50px;">
-                                <form role="form">
+                                {!! Form::open(['url' => '/users/login']) !!}
                                     <div class="form-group">
                                         <label for="username"><span class="glyphicon glyphicon-envelope"></span> Email</label>
-                                        <input type="text" class="form-control" id="email" name="email" placeholder="Enter email">
+                                        <input type="text" class="form-control" id="email" name="username" placeholder="Enter email">
                                     </div>
                                     <div class="form-group">
                                         <label for="password"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
@@ -112,7 +112,7 @@
                                         <label><input type="checkbox" value="" checked>Remember me</label>
                                     </div>
                                     <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
-                                </form>
+                                {!! Form::close() !!}
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>

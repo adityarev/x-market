@@ -13,7 +13,7 @@ class Item extends Model
     ];
 
     public function user(){
-        return $this->belongsTo('Xmarket\User','item_seller');
+        return $this->belongsTo('Xmarket\User','item_seller','username');
     }
 
     public function subCategories(){

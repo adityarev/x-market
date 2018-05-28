@@ -10,7 +10,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
-        @if (isset($user))
+        @if (Session::has('user'))
             @include('partials.navbars.navbar-logged-in')
         @else
             @include('partials.navbars.navbar')

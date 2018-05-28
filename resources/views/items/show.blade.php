@@ -22,7 +22,7 @@
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><strong>Item Name</strong></h3>
+                    <h3 class="panel-title"><strong>{{$item->item_name}}</strong></h3>
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -33,16 +33,16 @@
                             <table class="table table-item-information">
                                 <tbody>
                                 <tr>
-                                    <td><span class="fa fa-credit-card" style="margin-right: 10px"></span>Price</td>
-                                    <td>Item's price</td>
+                                    <td><span class="fa fa-dollar" style="margin-right: 10px"></span>Price</td>
+                                    <td>{{$item->item_price}}</td>
                                 </tr>
                                 <tr>
                                     <td><span class="fa fa-user" style="margin-right: 10px"></span>Seller</td>
-                                    <td>Seller's Name</td>
+                                    <td>{{$item->user->username}}</td>
                                 </tr>
                                 <tr>
                                     <td><span class="fa fa-info-circle" style="margin-right: 10px"></span>Description</td>
-                                    <td>Original product</td>
+                                    <td>{{$item->item_description}}</td>
                                 </tr>
                                 </tbody>
                             </table>

@@ -15,11 +15,12 @@ class CreateProfilesTable extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('user_name');
+            $table->string('username');
             $table->string('user_fullname',30)->default('Insert Your Fullname');
             $table->string('user_city',30)->default('Insert The City you live in');
             $table->string('user_address',30)->default('Insert Your Address');
             $table->string('user_description',255)->default('Insert Your Description');
+            $table->string('user_phone_number',255)->default('Insert Your Description');
             $table->timestamps();
         });
     }

@@ -47,7 +47,7 @@
                 </div>
                 <ul class="list-group">
                     @foreach ($category->subCategories as $subCategory)                    
-                        <a href="#" class="list-group-item">{{$subCategory->sub_category_name}}</a>                    
+                        <a href="{{ url('category/'.$category->category_name.'/'.$subCategory->sub_category_name) }}" class="list-group-item">{{$subCategory->sub_category_name}}</a>                    
                     @endforeach
                 </ul>
             </div>

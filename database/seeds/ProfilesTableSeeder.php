@@ -13,7 +13,7 @@ class ProfilesTableSeeder extends Seeder
     public function run()
     {
         Profile::create([
-            'user_name' => 'admin',
+            'username' => 'admin',
             'user_fullname' => 'Xmarket-Admin',
             'user_city' => 'Xmarket City',
             'user_address' => 'Xmarket',
@@ -21,7 +21,7 @@ class ProfilesTableSeeder extends Seeder
         ]);
 
         Profile::create([
-            'user_name' => 'scott',
+            'username' => 'scott',
             'user_fullname' => 'Aldera Scott',
             'user_city' => 'Xmarket City',
             'user_address' => 'Xmarket',

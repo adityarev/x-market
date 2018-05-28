@@ -39,7 +39,7 @@ Route::get('items/{username}/{itemname}', 'ItemController@show');
 
 Route::get('category', 'CategoryController@index');
 Route::get('category/{categoryName}', 'CategoryController@show');
-Route::get('category/{categoryName}/{subCategoryName}', 'CategoryController@show');
+Route::get('category/{categoryName}/{subCategoryName}', 'CategoryController@subCategoryShow');
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');

@@ -7,8 +7,15 @@ use Xmarket\User as User;
 use Xmarket\Profile;
 use Xmarket\Http\Controllers\Controller;
 use Xmarket\Category;
+use Xmarket\Notification;
+use Session;
 
-class UserController extends Controller {
+class UserController extends BaseController {
+    
+    public function username()
+    {
+        return 'username';
+    }
 
     public function index(){
         return 'Index';
@@ -18,16 +25,16 @@ class UserController extends Controller {
         return view('auth.login');
     }
 
-    public function login(Request $request){
-        $credentials = $request->only('email','password');
+    public function login(Request $request){                        
+        $credentials = $request->only('username','password');        
 
         if ($login = Auth::guard('user')->attempt($credentials)){
-            $email = $request->only('email')['email'];
-            $user = User::where('email','=',$email)->first();
-            $request->session()->put('user', $user);
-            echo $request->session()->get('user')->name;
+            $username = $request->only('username')['username'];
+            $user = User::where('username','=',$username)->first();            
+            $request->session()->put('user', $user);            
+            return back();
         } else 
-            echo 'gagal';
+            return back();
     }
 
     public function logout(Request $request){
@@ -37,6 +44,7 @@ class UserController extends Controller {
         if ($request->session()->has('user')){
             echo 'Gagal';
         }
+        return redirect()->back();
     }
 
     public function register(){
@@ -44,25 +52,27 @@ class UserController extends Controller {
     }
 
     public function store(){
-        Input::merge(['user_password' => bcrypt(Input::get('user_password'))]);
+        Input::merge(['password' => bcrypt(Input::get('password'))]);
         User::create(Input::all());
-        Profile::create(['user_name' => Input::get('user_name')]);
-        return redirect('welcome');
+        Profile::create(['username' => Input::get('username')]);
+        $user = User::where('username','=',Input::get('username'))->first();            
+        Session::put('user', $user);  
+        return redirect('category');
     }
 
     public function profileShow($username){
-        $profile = Profile::where('user_name',$username)->first();
+        $profile = Profile::where('username',$username)->first();
         $categories = Category::all();
         return view('profiles.show')->with('profile',$profile)->with('categories',$categories);
     }
 
     public function profileEdit($username){
-        $profile = Profile::where('user_name',$username)->first();
+        $profile = Profile::where('username',$username)->first();
         return view('profiles.edit')->with('profile', $profile);
     }
 
     public function profileUpdate($username){
-        $profile = Profile::where('user_name',$username)->first();        
+        $profile = Profile::where('username',$username)->first();        
         $profile->update(Input::all());
 
         return redirect('users/'.$username);

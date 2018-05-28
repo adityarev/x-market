@@ -1,4 +1,4 @@
-@extends('layouts.master)
+@extends('layouts.master')
 @section('content')
 <style>
     .table-item-information > tbody > tr {

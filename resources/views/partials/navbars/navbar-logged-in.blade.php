@@ -92,27 +92,16 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories<span class="caret"></span></a>
                     <ul class="dropdown-menu">
+                        @foreach($categories as $category)                        
                         <li class="dropdown-submenu">
-                            <a class="test" tabindex="-1" href="#">Category 1 <span class="glyphicon glyphicon-menu-right"></span></a>
+                            <a class="category" tabindex="-1" href="{{ url('category/'.$category->category_name) }}"> {{ $category->category_name }} <span class="glyphicon glyphicon-menu-right" style="float: right;"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a tabindex="-1" href="#">Category 1-1</a></li>
-                                <li><a tabindex="-1" href="#">Category 1-2</a></li>
+                                @foreach($category->subCategories as $subCategory)
+                                    <li><a tabindex="-1" href="{{ url('category/'.$category->category_name.'/'.$subCategory->sub_category_name) }}"> {{ $subCategory->sub_category_name }} </a></li>
+                                @endforeach                                
                             </ul>
                         </li>
-                        <li class="dropdown-submenu">
-                            <a class="test" tabindex="-1" href="#">Category 2 <span class="glyphicon glyphicon-menu-right"></span></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a tabindex="-1" href="#">Category 2-1</a></li>
-                                <li><a tabindex="-1" href="#">Category 2-2</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown-submenu">
-                            <a class="test" tabindex="-1" href="#">Category 3 <span class="glyphicon glyphicon-menu-right"></span></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a tabindex="-1" href="#">Category 3-1</a></li>
-                                <li><a tabindex="-1" href="#">Category 3-2</a></li>
-                            </ul>
-                        </li>
+                        @endforeach                        
                     </ul>
                 </li>
             </ul>
@@ -130,54 +119,44 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <span class="glyphicon glyphicon-bell alertNotificacao"></span>
-                        <span class='badgeAlert'>2</span>
+                        @if(isset($notificationsCount) && $notificationsCount>0)
+                            <span class='badgeAlert'> {{$notificationsCount}} </span>
+                        @endif
                         <span class="caret"></span>
                     </a>
-                    <ul class="list-notificacao dropdown-menu">
-                        <li id='item_notification_1'>
-                            <div class="media">
-                                <div class="media-left">
-                                    <a href="#">
-                                        <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PCEtLQpTb3VyY2UgVVJMOiBob2xkZXIuanMvNjR4NjQKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNWZhMWJmZmI3MCB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1ZmExYmZmYjcwIj48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSIxMy40Njg3NSIgeT0iMzYuNSI+NjR4NjQ8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" data-holder-rendered="true">
-                                    </a>
-                                </div>
-                                <div class="media-body">
-                                    <div class='exclusaoNotificacao'>
-                                        <button class='btn btn-danger btn-xs button_exclusao' id='1' onclick='excluirItemNotificacao(this)'>x</button>
+                    <ul class="list-notificacao dropdown-menu">                        
+                        @if(isset($notifications))
+                            @foreach($notifications as $notification)
+                            <li id='item_notification_1'>
+                                <div class="media">
+                                    <div class="media-left">
+                                        <a href="#">
+                                            <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PCEtLQpTb3VyY2UgVVJMOiBob2xkZXIuanMvNjR4NjQKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNWZhMWJmZmI3MCB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1ZmExYmZmYjcwIj48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSIxMy40Njg3NSIgeT0iMzYuNSI+NjR4NjQ8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" data-holder-rendered="true">
+                                        </a>
                                     </div>
-                                    <h4 class="media-heading">ITEM 1</h4>
-                                    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li id='item_notification_2'>
-                            <div class="media">
-                                <div class="media-left">
-                                    <a href="#">
-                                        <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PCEtLQpTb3VyY2UgVVJMOiBob2xkZXIuanMvNjR4NjQKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNWZhMWJmZmI3MCB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1ZmExYmZmYjcwIj48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSIxMy40Njg3NSIgeT0iMzYuNSI+NjR4NjQ8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" data-holder-rendered="true">
-                                    </a>
-                                </div>
-                                <div class="media-body">
-                                    <div class='exclusaoNotificacao'>
-                                        <button class='btn btn-danger btn-xs' id='2' onclick='excluirItemNotificacao(this)'>x</button>
+                                    <div class="media-body">
+                                        <div class='exclusaoNotificacao'>
+                                            <button class='btn btn-danger btn-xs button_exclusao' id='1' onclick='excluirItemNotificacao(this)'>x</button>
+                                        </div>
+                                        <h4 class="media-heading">{{$notification->notification_title}}</h4>
+                                        <p>{{ $notification->notification_content }}</p>
                                     </div>
-                                    <h4 class="media-heading">ITEM 2</h4>
-                                    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
                                 </div>
-                            </div>
-                        </li>
+                            </li>
+                            @endforeach
+                        @endif          
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <span class="glyphicon glyphicon-user" style="margin-right: 5px;"></span>Halo, User
+                        <span class="glyphicon glyphicon-user" style="margin-right: 5px;"></span>Halo, {{ Session::get('user')->username }}
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Profile</a></li>
+                        <li><a href="{{ url('users/'.Session::get('user')->username.'/edit') }}">Profile</a></li>
                         <li><a href="#">Purchases</a></li>
-                        <li><a href="#">Sales</a></li>
+                        <li><a href="{{ url('items/'.Session::get('user')->username) }}">Sales</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">Logout</a></li>
+                        <li><a href="{{ url('users/logout') }}">Logout</a></li>
                     </ul>
                 </li>
             </ul>
@@ -187,7 +166,7 @@
 
 <script>
     $(document).ready(function(){
-        var temp = $('.dropdown-submenu a.test');
+        var temp;
 
         $("#signup-btn").click(function(){
             $("#signup-modal").modal();
@@ -197,7 +176,7 @@
             $("#login-modal").modal();
         });
 
-        $('.dropdown-submenu a.test').on("mouseenter", function(e){
+        $('.dropdown-submenu a.category').on("mouseenter", function(e){
             $(this).next('ul').show();
             if (temp.get(0) !== $(this).get(0)) {
                 temp.next('ul').hide();
@@ -206,7 +185,7 @@
             e.preventDefault();
         });
 
-        $('.dropdown-submenu a.test').on("mouseleave", function(e){
+        $('.dropdown-submenu a.category').on("mouseleave", function(e){
             temp = $(this);
         });
     });

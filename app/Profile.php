@@ -9,6 +9,7 @@ class Profile extends Model
     public $timestamps = false;
     
     protected $fillable = [
+        'username',
         'user_fullname',
         'user_city',
         'user_address',

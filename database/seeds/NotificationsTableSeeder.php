@@ -13,7 +13,7 @@ class NotificationsTableSeeder extends Seeder
     public function run()
     {
         Notification::create([
-            'id' => 0,
+            'id' => 1,
             'notification_receiver' => 'scott',
             'notification_title' => 'Test Notification 1',
             'notification_content' => 'Notification Being Tested 1',
@@ -21,7 +21,7 @@ class NotificationsTableSeeder extends Seeder
         ]);
 
         Notification::create([
-            'id' => 1,
+            'id' => 2,
             'notification_receiver' => 'scott',
             'notification_title' => 'Test Notification 2',
             'notification_content' => 'Notification Being Tested 2',
@@ -29,7 +29,7 @@ class NotificationsTableSeeder extends Seeder
         ]);
 
         Notification::create([
-            'id' => 2,
+            'id' => 3,
             'notification_receiver' => 'scott',
             'notification_title' => 'Test Notification 3',
             'notification_content' => 'Notification Being Tested 3',
