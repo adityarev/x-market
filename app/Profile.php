@@ -14,6 +14,8 @@ class Profile extends Model
         'user_city',
         'user_address',
         'user_description',
+        'user_phone_number',
+        'user_date_of_birth',
     ];
 
     public function user(){
