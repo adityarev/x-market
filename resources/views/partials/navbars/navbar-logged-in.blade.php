@@ -149,12 +149,12 @@
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <span class="glyphicon glyphicon-user" style="margin-right: 5px;"></span>Halo, {{ Session::get('user')->username }}
+                        <span class="glyphicon glyphicon-user" style="margin-right: 5px;"></span>Halo, {{ Auth::user()->username }}
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ url('users/'.Session::get('user')->username.'/edit') }}">Profile</a></li>
+                        <li><a href="{{ url('users/'.Auth::user()->username.'/edit') }}">Profile</a></li>
                         <li><a href="#">Purchases</a></li>
-                        <li><a href="{{ url('items/'.Session::get('user')->username) }}">Sales</a></li>
+                        <li><a href="{{ url('items/'.Auth::user()->username) }}">Sales</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="{{ url('users/logout') }}">Logout</a></li>
                     </ul>

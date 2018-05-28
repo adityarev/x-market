@@ -15,7 +15,7 @@ use Session;
 use Image;
 use Storage;
 
-class UserController extends BaseController {
+class UserController extends BaseController {        
     
     public function username()
     {
@@ -33,21 +33,17 @@ class UserController extends BaseController {
     public function login(Request $request){                        
         $credentials = $request->only('username','password');        
 
-        if ($login = Auth::guard('user')->attempt($credentials)){
+        if (Auth::guard('user')->attempt($credentials)){
             $username = $request->only('username')['username'];
-            $user = User::where('username','=',$username)->first();            
-            $request->session()->put('user', $user);            
-            return back();
-        } else 
-            return back();
+            $user = User::where('username','=',$username)->first();
+            Auth::login($user);            
+        }
+        return back();
     }
 
     public function logout(Request $request){
-        if ($request->session()->has('user')){
-            $request->session()->flush();
-        }
-        if ($request->session()->has('user')){
-            echo 'Gagal';
+        if (Auth::check()){
+            Auth::logout();                       
         }
         return redirect()->back();
     }
@@ -57,12 +53,16 @@ class UserController extends BaseController {
     }
 
     public function store(){
-        Input::merge(['password' => bcrypt(Input::get('password'))]);
-        User::create(Input::all());
-        Profile::create(['username' => Input::get('username')]);
-        $user = User::where('username','=',Input::get('username'))->first();            
-        Session::put('user', $user);  
-        return redirect('category');
+        $user = User::where('username','=',Input::get('username'))->first();
+        //var_dump($user);
+        if ($user == null){
+            Input::merge(['password' => bcrypt(Input::get('password'))]);
+            User::create(Input::all());
+            Profile::create(['username' => Input::get('username')]);
+            $user = User::where('username','=',Input::get('username'))->first();
+            Auth::login($user);
+        }        
+        return back();
     }
 
     public function profileShow($username){
@@ -71,11 +71,16 @@ class UserController extends BaseController {
     }
 
     public function profileEdit($username){
-        $profile = Profile::where('username',$username)->first();
-        return view('profiles.edit')->with('profile', $profile);
+        if (Auth::check() && Auth::user()->username == $username){
+            $user = Auth::user();
+            $profile = Profile::where('username',$username)->first();
+            return view('profiles.edit')->with('profile', $profile)->with('user',$user);
+        } else {
+            return abort(404);
+        }
     }
 
-    public function profileUpdate(Request $request){        
+    public function profileUpdate(Request $request){                
         $profile = Profile::where('username',Session::get('user')->username)->first();
         
         if ($request->file('user_profile_pict')!=null){            
@@ -88,7 +93,7 @@ class UserController extends BaseController {
             Storage::move($path,'public/user_profile_picts/'.$targetPath);
             Input::merge(['user_profile_pict' => $targetPath]);
         } else {            
-            Input::merge(['user_profile_pict' => $user->profile->user_profile_pict]);
+            Input::merge(['user_profile_pict' => $profile->user_profile_pict]);
         }
         /*echo Input::get('user_profile_pict')."<br>";
         print_r(Input::all());*/

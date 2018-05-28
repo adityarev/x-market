@@ -28,7 +28,7 @@ Route::put('users/{username}', 'UserController@profileUpdate');
 Route::get('users/{username}', 'UserController@profileShow');
 Route::get('users/{username}/edit', 'UserController@profileEdit');
 
-Route::get('items/{username}/create', 'ItemController@create');
+Route::get('items/create', 'ItemController@create');
 Route::post('items/{username}', 'ItemController@store');
 Route::get('items/{username}/{itemname}/edit', 'ItemController@edit');
 Route::put('items/{username}/{itemname}', 'ItemController@update');

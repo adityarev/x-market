@@ -10,7 +10,7 @@
     <script src="{{ asset('js/bootstrap.min.js')}}"></script>
     </head>
     <body>
-        @if (Session::has('user'))
+        @if (Auth::check())
             @include('partials.navbars.navbar-logged-in')
         @else
             @include('partials.navbars.navbar')

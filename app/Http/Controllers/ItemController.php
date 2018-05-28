@@ -23,10 +23,10 @@ class ItemController extends BaseController
         return view('items.show')->with('user',$user)->with('item',$item);
     }
 
-    public function create($username){
-        $user = User::where('username',$username)->first();
+    public function create(){
+        //$user = User::where('username',$username)->first();
 
-        return view('items.create')->with('user',$user);
+        return view('items.create');
     }
 
     public function store($username){
