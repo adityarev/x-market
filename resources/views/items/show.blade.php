@@ -19,17 +19,17 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2 toppad" >
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title"><strong>{{$item->item_name}}</strong></h3>
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-3 col-lg-3 " align="center">
+                        <div class="col-md-4 col-lg-4 col-md-offset-1 col-lg-offset-1" align="center">
                             <img alt="User Pic" src="https://media-services.digital-rb.com/s3/live-productcatalogue/sys-master/images/h3d/h49/8833674084382/image001.png?width=260&height=260" class="img-responsive">
                         </div>
-                        <div class=" col-md-9 col-lg-9 ">
+                        <div class="col-md-6 col-lg- toppad">
                             <table class="table table-item-information">
                                 <tbody>
                                 <tr>
@@ -48,10 +48,33 @@
                             </table>
                         </div>
                     </div>
+
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <h4>
+                            <a href="#" class="typewrite" data-period="2000" data-type='[ "Preview" ]' style="text-decoration: none">
+                                <span class="wrap"></span>
+                            </a>
+                        </h4>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="height: 250px; padding: 110px 0px">
+                                <span class="glyphicon glyphicon-chevron-left fa-2x pull-left"></span>
+                            </div>
+                            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 panel panel-primary" style="height: 250px">
+                                <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/medium/dettol_dettol-fresh-anti-bakteri-sabun-mandi--105-gr-_full01.jpg" class="img-responsive" style="height: 100%; margin: 0px auto">
+                            </div>
+                            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="height: 250px; padding: 110px 0px">
+                                <span class="glyphicon glyphicon-chevron-right fa-2x pull-right"></span>
+                            </div>
+                        </div>
+                    </div>
+
+
                     @if (Auth::check() && Auth::user()->username == $user->username)
                         <div class="row">
-                            <div class="col-md-3 col-lg-3"></div>
-                            <div class="col-md-9 col-lg-9">
+                            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1" style="text-align: right">
                                 <a href="{{ url('items/'.$item->user->username.'/'.$item->item_name.'/edit') }}">
                                     <button class="btn btn-warning">
                                         <span class="glyphicon glyphicon-pencil" style="margin-right: 5px;"></span>
@@ -60,9 +83,10 @@
                                 </a>
 
                                 <button class="btn btn-danger" id="delete-btn">
-                                    <span class="glyphicon glyphicon-trash" style="margin-right: 5px;"></span>
+                                    <span class="glyphicon glyphicon-trash"></span>
                                     Delete
                                 </button>
+
 
                                 <!-- Delete Modal -->
                                 <div class="modal fade" id="delete-modal" role="dialog">
@@ -151,5 +175,62 @@
             $("#buy-modal").modal();
         });
     });
+
+    var TxtType = function(el, toRotate, period) {
+        this.toRotate = toRotate;
+        this.el = el;
+        this.loopNum = 0;
+        this.period = parseInt(period, 10) || 2000;
+        this.txt = '';
+        this.tick();
+        this.isDeleting = false;
+    };
+
+    TxtType.prototype.tick = function() {
+        var i = this.loopNum % this.toRotate.length;
+        var fullTxt = this.toRotate[i];
+
+        if (this.isDeleting) {
+            this.txt = fullTxt.substring(0, this.txt.length - 1);
+        } else {
+            this.txt = fullTxt.substring(0, this.txt.length + 1);
+        }
+
+        this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+
+        var that = this;
+        var delta = 200 - Math.random() * 100;
+
+        if (this.isDeleting) { delta /= 2; }
+
+        if (!this.isDeleting && this.txt === fullTxt) {
+            delta = this.period;
+            this.isDeleting = true;
+        } else if (this.isDeleting && this.txt === '') {
+            this.isDeleting = false;
+            this.loopNum++;
+            delta = 500;
+        }
+
+        setTimeout(function() {
+            that.tick();
+        }, delta);
+    };
+
+    window.onload = function() {
+        var elements = document.getElementsByClassName('typewrite');
+        for (var i=0; i<elements.length; i++) {
+            var toRotate = elements[i].getAttribute('data-type');
+            var period = elements[i].getAttribute('data-period');
+            if (toRotate) {
+                new TxtType(elements[i], JSON.parse(toRotate), period);
+            }
+        }
+        // INJECT CSS
+        var css = document.createElement("style");
+        css.type = "text/css";
+        css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
+        document.body.appendChild(css);
+    };
 </script>
 @stop
