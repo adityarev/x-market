@@ -79,11 +79,11 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <a href="{{ url('items/'.$item->user->username.'/'.$item->item_name.'/delete') }}">
-                                                    <button type="submit" class="btn btn-danger btn-default" data-dismiss="modal">
+                                                    <button class="btn btn-danger btn-default">
                                                         <span class="glyphicon glyphicon-trash"></span> Yes
                                                     </button>
                                                 </a>
-                                                <button type="submit" class="btn btn-success btn-default" data-dismiss="modal">
+                                                <button type="submit" class="btn btn-success" data-dismiss="modal">
                                                     <span class="glyphicon glyphicon-remove"></span> No
                                                 </button>
                                             </div>
@@ -96,10 +96,38 @@
                         <div class="row">
                             <div class="col-md-3 col-lg-3"></div>
                             <div class="col-md-9 col-lg-9">
-                                <button class="btn btn-warning">
+                                <button class="btn btn-warning" id="buy-btn">
                                     <span class="glyphicon glyphicon-shopping-cart" style="margin-right: 5px;"></span>
                                     Buy
                                 </button>
+
+                                <!-- Buy Modal -->
+                                <div class="modal fade" id="buy-modal" role="dialog">
+                                    <div class="modal-dialog">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header" style="padding:35px 50px;">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4><span class="glyphicon glyphicon-info-sign"></span> Confirmation!</h4>
+                                            </div>
+                                            <div class="modal-body" style="padding:40px 50px;">
+                                                <h5>Do you want to buy this item ?</h5>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="{{ url('items/'.$item->user->username.'/'.$item->item_name.'/buy') }}">
+                                                    <button class="btn btn-success">
+                                                        <span class="glyphicon glyphicon-ok"></span> Yes
+                                                    </button>
+                                                </a>
+                                                <button type="submit" class="btn btn-danger" data-dismiss="modal">
+                                                    <span class="glyphicon glyphicon-remove"></span> No
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <button class="btn btn-danger">
                                     <span class="glyphicon glyphicon-remove" style="margin-right: 5px;"></span>
                                     Cancel
@@ -117,6 +145,10 @@
     $(document).ready(function(){
         $("#delete-btn").click(function(){
             $("#delete-modal").modal();
+        });
+
+        $("#buy-btn").click(function(){
+            $("#buy-modal").modal();
         });
     });
 </script>

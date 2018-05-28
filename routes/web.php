@@ -36,6 +36,7 @@ Route::get('items/{username}/{itemname}/delete', 'ItemController@delete');
 Route::delete('items/{username}/{itemname}', 'ItemController@destroy');
 Route::get('items/{username}', 'ItemController@index');
 Route::get('items/{username}/{itemname}', 'ItemController@show');
+Route::get('items/{username}/{itemname}/buy', 'ItemController@buy');
 
 Route::get('category', 'CategoryController@index');
 Route::get('category/{categoryName}', 'CategoryController@show');

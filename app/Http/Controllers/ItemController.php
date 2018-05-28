@@ -79,4 +79,12 @@ class ItemController extends BaseController
 
         return redirect('items/'.$user->username);
     }
+
+    public function buy($username, $itemname){
+        $tmp = str_replace("_"," ",$itemname);
+        $user = User::where('username',$username)->first();
+        $item = $user->item->where('item_name',$tmp)->first();
+
+        echo $item . " purchased by ". $user;
+    }
 }
