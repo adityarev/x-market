@@ -52,14 +52,44 @@
                         <div class="row">
                             <div class="col-md-3 col-lg-3"></div>
                             <div class="col-md-9 col-lg-9">
-                                <button class="btn btn-warning">
-                                    <span class="glyphicon glyphicon-pencil" style="margin-right: 5px;"></span>
-                                    Edit
-                                </button>
-                                <button class="btn btn-danger">
+                                <a href="{{ url('items/'.$item->user->username.'/'.$item->item_name.'/edit') }}">
+                                    <button class="btn btn-warning">
+                                        <span class="glyphicon glyphicon-pencil" style="margin-right: 5px;"></span>
+                                        Edit
+                                    </button>
+                                </a>
+
+                                <button class="btn btn-danger" id="delete-btn">
                                     <span class="glyphicon glyphicon-trash" style="margin-right: 5px;"></span>
                                     Delete
                                 </button>
+
+                                <!-- Delete Modal -->
+                                <div class="modal fade" id="delete-modal" role="dialog">
+                                    <div class="modal-dialog">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header" style="padding:35px 50px;">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4><span class="glyphicon glyphicon-warning-sign"></span> Warning!</h4>
+                                            </div>
+                                            <div class="modal-body" style="padding:40px 50px;">
+                                                <h5>This item would be delete permanently. Are you sure ?</h5>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="{{ url('items/'.$item->user->username.'/'.$item->item_name.'/delete') }}">
+                                                    <button type="submit" class="btn btn-danger btn-default" data-dismiss="modal">
+                                                        <span class="glyphicon glyphicon-trash"></span> Yes
+                                                    </button>
+                                                </a>
+                                                <button type="submit" class="btn btn-success btn-default" data-dismiss="modal">
+                                                    <span class="glyphicon glyphicon-remove"></span> No
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     @else
@@ -82,4 +112,12 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+        $("#delete-btn").click(function(){
+            $("#delete-modal").modal();
+        });
+    });
+</script>
 @stop
