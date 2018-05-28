@@ -18,17 +18,17 @@
                         @foreach($subCategory->items as $item)
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 toppad" >
                                 <div class="panel panel-default">
-                                    <a href="{{url('items/'.$item->user->username.'/'.$item->item_name)}}">
-                                        <div class="panel-body">
-                                            <div class="col-md-12 col-lg-12" id="{{ $item->id }}" style="padding:0px; opacity: 0.4">
-                                                <img alt="300x200" style="width: 100%" src="http://placehold.it/200x150">
-                                            </div>
-                                            <div class="col-md-12 col-lg-12" style="padding:0px">
-                                                <h4>{{$item->item_name}}</h4>
-                                                <span class="fa fa-dollar" style="margin-right: 5px"></span>{{ $item->item_price }}
-                                            </div>
+                                    <div class="panel-body">
+                                        <div class="col-md-12 col-lg-12" id="{{ $item->id }}" style="padding:0px; opacity: 0.4">
+                                            <img alt="300x200" style="width: 100%" src="http://placehold.it/200x150">
                                         </div>
-                                    </a>
+                                        <div class="col-md-12 col-lg-12" style="padding:0px">
+                                            <a href="{{url('items/'.$item->user->username.'/'.$item->item_name)}}">
+                                                <h4>{{$item->item_name}}</h4>
+                                            </a>
+                                            <span class="fa fa-dollar" style="margin-right: 5px"></span>{{ $item->item_price }}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         @endforeach

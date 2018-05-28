@@ -23,7 +23,9 @@
                                                 <img alt="300x200" style="width: 100%" src="http://placehold.it/200x150">
                                             </div>
                                             <div class="col-md-4 col-lg-4 col-md-offset-1 col-lg-offset-1s" style="padding:0px">
-                                                <h4>{{$item->item_name}}</h4>
+                                                <a href="{{ url('items/'.$item->user->username.'/'.$item->item_name) }}">
+                                                    <h4>{{$item->item_name}}</h4>
+                                                </a>
                                                 <span class="fa fa-dollar" style="margin-right: 5px"></span>{{ $item->item_price }}
                                             </div>
                                             <div class="col-md-3 col-lg-3" style="padding: 0px;">

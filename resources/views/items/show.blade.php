@@ -48,19 +48,35 @@
                             </table>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-3 col-lg-3"></div>
-                        <div class="col-md-9 col-lg-9">
-                            <button class="btn btn-warning">
-                                <span class="glyphicon glyphicon-shopping-cart" style="margin-right: 5px;"></span>
-                                Buy
-                            </button>
-                            <button class="btn btn-danger">
-                                <span class="glyphicon glyphicon-remove-circle" style="margin-right: 5px;"></span>
-                                Cancel
-                            </button>
+                    @if (Session::has('user') && Session::get('user')->username == $user->username)
+                        <div class="row">
+                            <div class="col-md-3 col-lg-3"></div>
+                            <div class="col-md-9 col-lg-9">
+                                <button class="btn btn-warning">
+                                    <span class="glyphicon glyphicon-pencil" style="margin-right: 5px;"></span>
+                                    Edit
+                                </button>
+                                <button class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-trash" style="margin-right: 5px;"></span>
+                                    Delete
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    @else
+                        <div class="row">
+                            <div class="col-md-3 col-lg-3"></div>
+                            <div class="col-md-9 col-lg-9">
+                                <button class="btn btn-warning">
+                                    <span class="glyphicon glyphicon-shopping-cart" style="margin-right: 5px;"></span>
+                                    Buy
+                                </button>
+                                <button class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-remove" style="margin-right: 5px;"></span>
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

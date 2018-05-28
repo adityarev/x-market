@@ -80,7 +80,9 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-                                <p>Already have an account? <a href="#">Login</a></p>
+                                <p>Already have an account?
+                                    <a href="#" id="login-on-signup">Login</a>
+                                </p>
                             </div>
                         </div>
 
@@ -101,8 +103,8 @@
                             <div class="modal-body" style="padding:40px 50px;">
                                 {!! Form::open(['url' => '/users/login']) !!}
                                     <div class="form-group">
-                                        <label for="username"><span class="glyphicon glyphicon-envelope"></span> Email</label>
-                                        <input type="text" class="form-control" id="email" name="username" placeholder="Enter email">
+                                        <label for="username"><span class="glyphicon glyphicon-user"></span> Username</label>
+                                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
                                     </div>
                                     <div class="form-group">
                                         <label for="password"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
@@ -116,7 +118,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-                                <p>Not a member? <a href="#">Sign Up</a></p>
+                                <p>Not a member? <a href="#" id="signup-on-login">Sign Up</a></p>
                                 <p>Forgot <a href="#">Password?</a></p>
                             </div>
                         </div>
@@ -151,6 +153,16 @@
 
         $('.dropdown-submenu a.category').on("mouseleave", function(e){
             temp = $(this);
+        });
+
+        $("#login-on-signup").click(function(){
+            $("#signup-modal").modal('hide');
+            $("#login-modal").modal();
+        });
+
+        $("#signup-on-login").click(function(){
+            $("#login-modal").modal('hide');
+            $("#signup-modal").modal();
         });
     });
 </script>
