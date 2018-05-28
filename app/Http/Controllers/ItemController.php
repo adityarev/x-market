@@ -10,9 +10,10 @@ use Xmarket\Item;
 class ItemController extends BaseController
 {
     public function index($username){
+        $user = User::where('username',$username)->first();
         $items = User::where('username',$username)->first()->item;
         
-        return view('items.index')->with('items',$items);
+        return view('items.index')->with('items',$items)->with('user',$user);
     }
 
     public function show($username, $itemname){        
