@@ -1,7 +1,11 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
+
 use Xmarket\Item;
+use Xmarket\User;
+use Xmarket\SubCategory;
 
 class ItemsTableSeeder extends Seeder
 {
@@ -13,6 +17,23 @@ class ItemsTableSeeder extends Seeder
     public function run()
     {
         //
+        $faker = Faker::create();
+
+        $users = User::all()->pluck('username')->toArray();
+        $subCategories = SubCategory::all()->pluck('id')->toArray();
+
+        foreach(range(1,200) as $index){
+            Item::create([                
+                'sub_category_id'   => $faker->randomElement($subCategories),
+                'item_seller'       => $faker->randomElement($users),            
+                'item_name'         => $faker->unique()->name,
+                'item_description'  => $faker->text,
+                'item_price' => $faker->randomNumber(5),
+                'item_rating' => 4.45,
+            ]);
+        }
+
+
         Item::create([
             'sub_category_id'   => 1,
             'item_seller'       => 'scott',            

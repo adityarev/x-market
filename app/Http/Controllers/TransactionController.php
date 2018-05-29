@@ -38,19 +38,17 @@ class TransactionController extends BaseController
                 return abort(404);
         } else 
             return abort(404);
-    }
-
-    public function store(){
-        
-    }
+    }    
 
     public function update($transactionid){        
-        $transaction = Transaction::find($transactionid);
+        if (Auth::check()){
+            $transaction = Transaction::find($transactionid);
 
-        $transaction->status = Input::get('status');
+            $transaction->status = Input::get('status');
 
-        $transaction->save();
+            $transaction->save();
 
-        return redirect('transactions');
+            return redirect('transactions');
+        } else return abort(404);
     }
 }

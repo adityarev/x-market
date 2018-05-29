@@ -31,14 +31,20 @@ class UserController extends BaseController {
     }
 
     public function login(Request $request){                        
+        $this->validate($request,[
+            'username'=>'required',
+            'password'=>'required',
+         ]);
+        
         $credentials = $request->only('username','password');        
 
         if (Auth::guard('user')->attempt($credentials)){
             $username = $request->only('username')['username'];
             $user = User::where('username','=',$username)->first();
-            Auth::login($user);            
+            Auth::login($user);
+            return back();
         }
-        return back();
+        
     }
 
     public function logout(Request $request){
@@ -53,8 +59,7 @@ class UserController extends BaseController {
     }
 
     public function store(){
-        $user = User::where('username','=',Input::get('username'))->first();
-        //var_dump($user);
+        $user = User::where('username','=',Input::get('username'))->first();        
         if ($user == null){
             Input::merge(['password' => bcrypt(Input::get('password'))]);
             User::create(Input::all());

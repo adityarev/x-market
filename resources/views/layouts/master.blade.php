@@ -17,16 +17,12 @@
         @else
             @include('partials.navbars.navbar')
         @endif        
-        <div class="container">
-            <div class="page-header">
-                <div class="text-right">                
-                @yield('header')
-            </div>
+        <div class="container">            
             @if (Session::has('message'))
                 <div class="alert alert-success">
                     {{ Session::get('message') }}
                 </div>
-            @endif
+            @endif            
             @if (Session::has('error'))
                 <div class="alert alert-warning">
                     {{ Session::get('error') }}

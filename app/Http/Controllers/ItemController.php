@@ -34,31 +34,31 @@ class ItemController extends BaseController
     }
 
     public function create(){
-        if (Auth::check())
-            return view('items.create');
-        else 
-            return abort(404);
+        if (Auth::check())return view('items.create');
+        else return abort(404);
     }
 
     public function store(Request $request){                                                
-        if (Input::file('item_image')!=null){            
-            $path = Storage::putFile('public', Input::file('item_image'));
-            $targetPath = date('Y-m-d-H-m-s').'-'.Input::file('item_image')->getClientOriginalName();            
-            Storage::move($path,'public/item_images/'.$targetPath);
-            Input::merge(['item_image' => $targetPath]);
-        } else {
-            Input::merge(['item_image' => null]);
-        }        
-        Item::create([
-            'item_seller'       => Auth::user()->username,
-            'sub_category_id'   => Input::get('sub_category_id'),
-            'item_name'         => Input::get('item_name'),
-            'item_image'        => Input::get('item_image'),
-            'item_description'  => Input::get('item_description'),
-            'item_price'        => Input::get('item_price'),
-        ]);        
+        if(Auth::check()){
+            if (Input::file('item_image')!=null){            
+                $path = Storage::putFile('public', Input::file('item_image'));
+                $targetPath = date('Y-m-d-H-m-s').'-'.Input::file('item_image')->getClientOriginalName();            
+                Storage::move($path,'public/item_images/'.$targetPath);
+                Input::merge(['item_image' => $targetPath]);
+            } else {
+                Input::merge(['item_image' => null]);
+            }        
+            Item::create([
+                'item_seller'       => Auth::user()->username,
+                'sub_category_id'   => Input::get('sub_category_id'),
+                'item_name'         => Input::get('item_name'),
+                'item_image'        => Input::get('item_image'),
+                'item_description'  => Input::get('item_description'),
+                'item_price'        => Input::get('item_price'),
+            ]);        
 
-        return redirect('items/'.Auth::user()->username);
+            return redirect('items/'.Auth::user()->username);
+        } else return abort(404);
     }
 
     public function edit($username, $itemname){        
@@ -67,37 +67,37 @@ class ItemController extends BaseController
             $item = $user->item->where('item_name',$itemname)->first();
 
             return view('items.edit')->with('user',$user)->with('item',$item);
-        } 
-        else 
-            return abort(404);
+        } else return abort(404);
     }
 
     public function update($username, $itemname){        
-        $user = Auth::user();
-        $item = $user->item->where('item_name',$itemname)->first();
-        
-        if (Input::file('item_image')!=null){            
-            $path = Storage::putFile('public', Input::file('item_image'));
-            $targetPath = date('Y-m-d-H-m-s').'-'.Input::file('item_image')->getClientOriginalName();
-            $oldfile = $item->item_image;
-            if($oldfile != null){                
-                Storage::delete('public/item_images/'.$oldfile);
+        if (Auth::check()){
+            $user = Auth::user();
+            $item = $user->item->where('item_name',$itemname)->first();
+            
+            if (Input::file('item_image')!=null){            
+                $path = Storage::putFile('public', Input::file('item_image'));
+                $targetPath = date('Y-m-d-H-m-s').'-'.Input::file('item_image')->getClientOriginalName();
+                $oldfile = $item->item_image;
+                if($oldfile != null){                
+                    Storage::delete('public/item_images/'.$oldfile);
+                }
+                Storage::move($path,'public/item_images/'.$targetPath);
+                Input::merge(['item_image' => $targetPath]);
+            } else {
+                Input::merge(['item_image' => $item->item_image]);
             }
-            Storage::move($path,'public/item_images/'.$targetPath);
-            Input::merge(['item_image' => $targetPath]);
-        } else {
-            Input::merge(['item_image' => $item->item_image]);
-        }
 
-        $item->update([
-            'sub_category_id'   => Input::get('sub_category_id'),
-            'item_name'         => Input::get('item_name'),
-            'item_image'        => Input::get('item_image'),
-            'item_description'  => Input::get('item_description'),
-            'item_price'        => Input::get('item_price'),
-        ]);
+            $item->update([
+                'sub_category_id'   => Input::get('sub_category_id'),
+                'item_name'         => Input::get('item_name'),
+                'item_image'        => Input::get('item_image'),
+                'item_description'  => Input::get('item_description'),
+                'item_price'        => Input::get('item_price'),
+            ]);
 
-        return redirect('items/'.$user->username.'/'.$item->item_name);
+            return redirect('items/'.$user->username.'/'.$item->item_name);
+        } else return abort(404);
     }
 
     public function delete($username, $itemname){        
@@ -107,12 +107,14 @@ class ItemController extends BaseController
     }
 
     public function destroy($username, $itemname){        
-        $user = User::where('username',$username)->first();
-        $item = $user->item->where('item_name',$itemname)->first();
+        if (Auth::check()){
+            $user = Auth::user();
+            $item = $user->item->where('item_name',$itemname)->first();
 
-        $item->delete();
+            $item->delete();
 
-        return redirect('items/'.$user->username);
+            return redirect('items/'.$user->username);
+        } else return abort(404);
     }
 
     public function buy($username, $itemname){
@@ -134,25 +136,21 @@ class ItemController extends BaseController
             ]);
 
             return redirect('transactions');
-        } else 
-            return abort(404);
+        } else return abort(404);
     }
 
     public function manageImages($username,$itemname){
         if (Auth::check() && Auth::user()->username == $username){
             $item = Item::where('item_name',$itemname)->first();
             return view('items.images.index')->with('item',$item);
-        }
-        else 
-            return abort(404);
+        } else return abort(404);
     }
 
     public function addImage($username,$itemname){
         if (Auth::check() && Auth::user()->username == $username){
             $item = Item::where('item_name',$itemname)->first();
             return view('items.images.create')->with('item',$item);
-        } else 
-            return abort(404);
+        } else return abort(404);
     }
 
     public function storeImage($username,$itemname){
@@ -172,7 +170,6 @@ class ItemController extends BaseController
                 return redirect('items/'.Auth::user()->username.'/'.$item->item_name.'/manageimages');
             } else 
                 return back();                                                    
-        } else 
-            return abort(404);
+        } else return abort(404);
     }
 }
