@@ -20,4 +20,8 @@ class Transaction extends Model
     public function seller(){
         return $this->belongsTo('Xmarket\User','seller');
     }
+
+    public function item(){
+        return $this->belongsTo('Xmarket\Item');
+    }
 }

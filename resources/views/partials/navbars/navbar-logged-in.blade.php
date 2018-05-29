@@ -153,7 +153,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ url('users/'.Auth::user()->username.'/edit') }}">Profile</a></li>
-                        <li><a href="#">Purchases</a></li>
+                        <li><a href="{{ url('transactions')}}">Purchases</a></li>
                         <li><a href="{{ url('items/'.Auth::user()->username) }}">Sales</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="{{ url('users/logout') }}">Logout</a></li>

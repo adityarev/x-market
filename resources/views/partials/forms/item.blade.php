@@ -111,21 +111,21 @@
     <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
         <div class="panel panel-primary">
             <div class="panel-body">
-                {{--Tempat form ga jelas--}}
+            <!--{!! Form::open(['url' => '/items/'.$item->user->username.'/'.$item->item_name.'/addImage']) !!}-->
                     <fieldset>
                         <div class="form-group">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" formaction="{{ url('/items/'.$item->user->username.'/'.$item->item_name.'/addImage') }}">
                                     <span class="glyphicon glyphicon-plus" style="margin-right: 5px"></span>
                                     Add Image
                                 </button>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-4">
-                                {!! Form::file('item_image') !!}
+                                {!! Form::file('item_images') !!}
                             </div>
                         </div>
                     </fieldset>
-                {!! Form::close() !!}
+                <!--{!! Form::close() !!}-->
             </div>
         </div>
     </div>

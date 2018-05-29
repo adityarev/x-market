@@ -28,6 +28,9 @@ Route::put('users/{username}', 'UserController@profileUpdate');
 Route::get('users/{username}', 'UserController@profileShow');
 Route::get('users/{username}/edit', 'UserController@profileEdit');
 
+Route::get('transactions', 'TransactionController@index');
+Route::get('transactions/{transactionid}', 'TransactionController@index');
+
 Route::get('items/create', 'ItemController@create');
 Route::post('items/{username}', 'ItemController@store');
 Route::get('items/{username}/{itemname}/edit', 'ItemController@edit');

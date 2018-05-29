@@ -119,4 +119,12 @@ class ItemController extends BaseController
 
         echo $item . " purchased by ". $user;
     }
+
+    public function addImage(){
+        echo "Bla";
+    }
+
+    public function deleteImage(){
+        echo "del";
+    }
 }
