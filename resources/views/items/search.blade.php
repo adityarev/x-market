@@ -26,9 +26,13 @@
                                                 <img alt="300x200" style="width: 100%" src="http://placehold.it/200x150">
                                             @endif                                                
                                             </div>
-                                            <div class="col-md-4 col-lg-4 col-md-offset-1 col-lg-offset-1" style="padding:0px">                                                
-                                                    <h4>{{$item->item_name}}</h4>
-                                                </a>
+                                                    @if(Auth::check() && Auth::user()->username == $item->user->username)
+                                                        <a href="{{ url('items/'.$item->user->username.'/'.$item->item_name.'/edit') }}">
+                                                    @else
+                                                        <a href="{{ url('items/'.$item->user->username.'/'.$item->item_name) }}">
+                                                    @endif
+                                                        <h4>{{$item->item_name}}</h4>
+                                                    </a>                                                
                                                 <span class="fa fa-dollar" style="margin-right: 5px"></span>{{ $item->item_price }}
                                             </div>                                            
                                         </div>

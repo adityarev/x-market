@@ -26,7 +26,11 @@
                                             <div class="panel-body">
                                                 <div class="row">
                                                     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                                    @if($transaction->item->item_image != null)
+                                                        <img alt="User Pic" src="{{ asset('storage/item_images/'.$transaction->item->item_image) }}" class="img-responsive">
+                                                    @else
                                                         <img src="https://media-services.digital-rb.com/s3/live-productcatalogue/sys-master/images/h3d/h49/8833674084382/image001.png?width=320&height=320" class="img-responsive" style="height: 150px; max-width: 200px; margin: 0px auto">
+                                                    @endif
                                                     </div>
                                                     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                                                         <a href="{{ url('transactions/'.$transaction->id) }}">
@@ -44,24 +48,22 @@
                                                             </tr>
                                                             <tr>
                                                                 <td class="col-md-4 col-lg-4"><span class="fa fa-user" style="margin-right: 10px"></span>Seller</td>
-                                                                <td class="col-md-8 col-lg-8">: {{ $transaction->item->item_seller }}</td>
+                                                                <td class="col-md-8 col-lg-8">: {{ $transaction->seller }}</td>
                                                             </tr>
                                                             <tr>
                                                                 <td class="col-md-4 col-lg-4"><span class="fa fa-info-circle" style="margin-right: 10px"></span>Status</td>
-                                                                <td class="col-md-8 col-lg-8">:
-                                                                    @if(Auth::user()->username == $transaction->buyer)
-                                                                        @if ($transaction->status == 0)
-                                                                            Request Sent
-                                                                        @elseif ($transaction->status == 1)
-                                                                            Waiting for Seller Confirmation
-                                                                        @elseif ($transaction->status == 2)
-                                                                            Purchase Confirmed
-                                                                        @elseif ($transaction->status == 3)
-                                                                            Item is On Da Way
-                                                                        @elseif ($transaction->status == 4)
-                                                                            Completed
-                                                                        @endif
-                                                                    @endif
+                                                                <td class="col-md-8 col-lg-8">:                                                                    
+                                                                    @if ($transaction->status == 0)
+                                                                        Request Sent
+                                                                    @elseif ($transaction->status == 1)
+                                                                        Waiting for Seller Confirmation
+                                                                    @elseif ($transaction->status == 2)
+                                                                        Purchase Confirmed
+                                                                    @elseif ($transaction->status == 3)
+                                                                        Item is On Da Way
+                                                                    @elseif ($transaction->status == 4)
+                                                                        Completed
+                                                                    @endif                                                                    
                                                                 </td>
                                                             </tr>
                                                             </tbody>
@@ -71,9 +73,11 @@
                                                 <div class="row">
                                                     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
                                                     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                                                        <button class="btn btn-sm btn-danger">
+                                                        {!! Form::model($transaction,['url' => '/transactions/'.$transaction->id, 'method' => 'delete']) !!}
+                                                        <button class="btn btn-sm btn-danger" type="submit">
                                                             <span class="glyphicon glyphicon-trash" style="margin-right: 5px"></span>Cancel Purchase
                                                         </button>
+                                                        {!! Form::close() !!}
                                                     </div>
                                                 </div>
                                             </div>
@@ -92,8 +96,12 @@
                                         <div class="panel panel-default">
                                             <div class="panel-body">
                                                 <div class="row">
-                                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">                                                        
+                                                    @if($transaction->item->item_image != null)
+                                                        <img alt="User Pic" src="{{ asset('storage/item_images/'.$transaction->item->item_image) }}" class="img-responsive">
+                                                    @else
                                                         <img src="https://media-services.digital-rb.com/s3/live-productcatalogue/sys-master/images/h3d/h49/8833674084382/image001.png?width=320&height=320" class="img-responsive" style="height: 150px; max-width: 200px; margin: 0px auto">
+                                                    @endif
                                                     </div>
                                                     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                                                         <a href="{{ url('transactions/'.$transaction->id) }}">
@@ -111,24 +119,22 @@
                                                             </tr>
                                                             <tr>
                                                                 <td class="col-md-4 col-lg-4"><span class="fa fa-user" style="margin-right: 10px"></span>Buyer</td>
-                                                                <td class="col-md-8 col-lg-8">: {{ $transaction->item->item_buyer }}</td>
+                                                                <td class="col-md-8 col-lg-8">: {{ $transaction->buyer }}</td>
                                                             </tr>
                                                             <tr>
                                                                 <td class="col-md-4 col-lg-4"><span class="fa fa-info-circle" style="margin-right: 10px"></span>Status</td>
-                                                                <td class="col-md-8 col-lg-8">:
-                                                                    @if(Auth::user()->username == $transaction->buyer)
-                                                                        @if ($transaction->status == 0)
-                                                                            Never Seen
-                                                                        @elseif ($transaction->status == 1)
-                                                                            Waiting for Confirmation
-                                                                        @elseif ($transaction->status == 2)
-                                                                            Waiting for Payment
-                                                                        @elseif ($transaction->status == 3)
-                                                                            Sending Item
-                                                                        @elseif ($transaction->status == 4)
-                                                                            Completed
-                                                                        @endif
-                                                                    @endif
+                                                                <td class="col-md-8 col-lg-8">:                                                                    
+                                                                    @if ($transaction->status == 0)
+                                                                        Never Seen
+                                                                    @elseif ($transaction->status == 1)
+                                                                        Waiting for Confirmation
+                                                                    @elseif ($transaction->status == 2)
+                                                                        Waiting for Payment
+                                                                    @elseif ($transaction->status == 3)
+                                                                        Sending Item
+                                                                    @elseif ($transaction->status == 4)
+                                                                        Completed
+                                                                    @endif                                                                    
                                                                 </td>
                                                             </tr>
                                                             </tbody>
@@ -138,9 +144,11 @@
                                                 <div class="row">
                                                     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
                                                     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                                                        <button class="btn btn-sm btn-danger">
+                                                        {!! Form::model($transaction,['url' => '/transactions/'.$transaction->id, 'method' => 'delete']) !!}
+                                                        <button class="btn btn-sm btn-danger" type="submit">
                                                             <span class="glyphicon glyphicon-remove-circle" style="margin-right: 5px"></span>Cancel Confirmation
                                                         </button>
+                                                        {!! Form::close() !!}
                                                     </div>
                                                 </div>
                                             </div>
@@ -173,43 +181,4 @@
             });
         });
     </script>
-
-    Item Dibeli<br>
-        @foreach($buyTransactions as $transaction)
-            <a href="{{ url('transactions/'.$transaction->id) }}">
-            {{$transaction->item->item_name}} <br>
-            </a>
-            @if(Auth::user()->username == $transaction->buyer)
-                @if ($transaction->status == 0)
-                    Tunggu Konfirmasi Penjual<br>
-                @elseif ($transaction->status == 1)
-                    Segera bayar <br>
-                @elseif ($transaction->status == 2)
-                    Tunggu Konfirmasi pengiriman oleh penjual <br>
-                @elseif ($transaction->status == 3)
-                    Konfirmasi Barang Sudah Sampai <br>
-                @elseif ($transaction->status == 4)
-                    Transaksi Sudah Selesai <br>
-                @endif            
-            @endif
-        @endforeach
-    Item Dijual<br>
-        @foreach($sellTransactions as $transaction)
-            <a href="{{ url('transactions/'.$transaction->id) }}">
-            {{$transaction->item->item_name}} 
-            </a>
-            @if(Auth::user()->username == $transaction->seller)
-                @if ($transaction->status == 0)
-                    Terima Transaksi<br>
-                @elseif ($transaction->status == 1)
-                    Konfirmasi item terbayarkan <br>
-                @elseif ($transaction->status == 2)
-                    Konfirmasi pengiriman <br>
-                @elseif ($transaction->status == 3)
-                    Tunggu Konfirmasi Pembeli
-                @elseif ($transaction->status == 4)
-                    Transaksi Sudah Selesai
-                @endif            
-            @endif            
-        @endforeach
 @stop

@@ -105,9 +105,13 @@
                     </ul>
                 </li>
             </ul>
-            <form class="navbar-form navbar-left" action="/action_page.php">
+            <form class="navbar-form navbar-left" action="{{url('items/search')}}" method="get">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" name="search">
+                    @if(isset($_GET['query']))
+                        <?php echo "<input type=\"text\" class=\"form-control\" placeholder=\"Search\" name=\"query\" value=".$_GET['query'].">"?>                        
+                    @else
+                        <input type="text" class="form-control" placeholder="Search" name="query">
+                    @endif
                     <div class="input-group-btn">
                         <button class="btn btn-default" type="submit">
                             <i class="glyphicon glyphicon-search"></i>

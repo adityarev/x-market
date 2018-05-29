@@ -27,7 +27,7 @@
                                             @endif                                                
                                             </div>
                                             <div class="col-md-4 col-lg-4 col-md-offset-1 col-lg-offset-1" style="padding:0px">
-                                                @if(Auth::check() && Auth::user()->username == $user->username)
+                                                @if(Auth::check() && Auth::user()->username == $item->user->username)
                                                     <a href="{{ url('items/'.$item->user->username.'/'.$item->item_name.'/edit') }}">
                                                 @else
                                                     <a href="{{ url('items/'.$item->user->username.'/'.$item->item_name) }}">
@@ -36,7 +36,7 @@
                                                 </a>
                                                 <span class="fa fa-dollar" style="margin-right: 5px"></span>{{ $item->item_price }}
                                             </div>
-                                            @if(Auth::check() && Auth::user()->username == $user->username)
+                                            @if(Auth::check() && Auth::user()->username == $item->user->username)
                                             <div class="col-md-3 col-lg-3" style="padding: 0px;">
                                                 <a href="{{ url('items/'.$item->user->username.'/'.$item->item_name.'/edit') }}">
                                                     <button class="btn btn-warning col-md-12 col-lg-12" style="margin-top: 15px">
@@ -51,7 +51,7 @@
                                                 <!-- Delete Modal -->
                                                 <div class="modal fade" id="delete-modal-{{ $item->id }}" role="dialog">
                                                     <div class="modal-dialog">
-                                                        {!! Form::model($item, ['url' => '/items/'.$item->user->username.'/'.$item->item_name, 'method' => 'delete']) !!}
+                                                        {!! Form::model($item,['url' => 'items/'.$item->user->username.'/'.$item->item_name,'method'=>'delete']) !!}
                                                             <!-- Modal content-->
                                                             <div class="modal-content">
                                                                 <div class="modal-header" style="padding:35px 50px;">

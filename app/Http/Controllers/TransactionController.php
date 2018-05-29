@@ -44,10 +44,18 @@ class TransactionController extends BaseController
         if (Auth::check()){
             $transaction = Transaction::find($transactionid);
 
-            $transaction->status = Input::get('status');
+            $transaction->status = Input::get('status')+1;
 
             $transaction->save();
 
+            return redirect('transactions');
+        } else return abort(404);
+    }
+
+    public function destroy($transactionid){
+        if(Auth::check()){
+            $transaction = Transaction::find($transactionid);
+            $transaction->delete();
             return redirect('transactions');
         } else return abort(404);
     }

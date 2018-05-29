@@ -38,9 +38,13 @@
                     </ul>
                 </li>
             </ul>
-            <form class="navbar-form navbar-left" action="/action_page.php">
+            <form class="navbar-form navbar-left" action="{{url('items/search')}}" method="get">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" name="search">
+                    @if(isset($_GET['query']))
+                        <?php echo "<input type=\"text\" class=\"form-control\" placeholder=\"Search\" name=\"query\" value=".$_GET['query'].">"?>                        
+                    @else
+                        <input type="text" class="form-control" placeholder="Search" name="query">
+                    @endif
                     <div class="input-group-btn">
                         <button class="btn btn-default" type="submit">
                             <i class="glyphicon glyphicon-search"></i>
@@ -103,11 +107,11 @@
                                 {!! Form::open(['url' => '/users/login']) !!}
                                     <div class="form-group">
                                         <label for="username"><span class="glyphicon glyphicon-user"></span> Username</label>
-                                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
+                                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" require>
                                     </div>
                                     <div class="form-group">
                                         <label for="password"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
-                                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" require>
                                     </div>
                                     <div class="checkbox">
                                         <label><input type="checkbox" value="" checked>Remember me</label>

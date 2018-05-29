@@ -30,6 +30,7 @@ Route::get('users/{username}/edit', 'UserController@profileEdit');
 
 Route::get('transactions', 'TransactionController@index');
 Route::get('transactions/store','TransactionController@store');
+Route::delete('transactions/{transactionid}', 'TransactionController@destroy');
 Route::post('transactions/{transactionid}', 'TransactionController@update');
 Route::get('transactions/{transactionid}', 'TransactionController@show');
 

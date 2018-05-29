@@ -17,7 +17,11 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                                <img src="https://media-services.digital-rb.com/s3/live-productcatalogue/sys-master/images/h3d/h49/8833674084382/image001.png?width=320&height=320" class="img-responsive" style="height: 150px; max-width: 200px; margin: 0px auto">
+                                @if($transaction->item->item_image != null)
+                                    <img alt="User Pic" src="{{ asset('storage/item_images/'.$transaction->item->item_image) }}" class="img-responsive">
+                                @else
+                                    <img src="https://media-services.digital-rb.com/s3/live-productcatalogue/sys-master/images/h3d/h49/8833674084382/image001.png?width=320&height=320" class="img-responsive" style="height: 150px; max-width: 200px; margin: 0px auto">
+                                @endif
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                                 <table class="table table-user-information">
