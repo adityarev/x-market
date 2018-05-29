@@ -51,15 +51,15 @@
                                                                 <td class="col-md-8 col-lg-8">:
                                                                     @if(Auth::user()->username == $transaction->buyer)
                                                                         @if ($transaction->status == 0)
-                                                                            Tunggu Konfirmasi Penjual<br>
+                                                                            Request Sent
                                                                         @elseif ($transaction->status == 1)
-                                                                            Segera bayar <br>
+                                                                            Waiting for Seller Confirmation
                                                                         @elseif ($transaction->status == 2)
-                                                                            Tunggu Konfirmasi pengiriman oleh penjual <br>
+                                                                            Purchase Confirmed
                                                                         @elseif ($transaction->status == 3)
-                                                                            Konfirmasi Barang Sudah Sampai <br>
+                                                                            Item is On Da Way
                                                                         @elseif ($transaction->status == 4)
-                                                                            Transaksi Sudah Selesai <br>
+                                                                            Completed
                                                                         @endif
                                                                     @endif
                                                                 </td>
@@ -110,19 +110,23 @@
                                                                 <td class="col-md-8 col-lg-8">: {{ $transaction->item->item_price }}</td>
                                                             </tr>
                                                             <tr>
+                                                                <td class="col-md-4 col-lg-4"><span class="fa fa-user" style="margin-right: 10px"></span>Buyer</td>
+                                                                <td class="col-md-8 col-lg-8">: {{ $transaction->item->item_buyer }}</td>
+                                                            </tr>
+                                                            <tr>
                                                                 <td class="col-md-4 col-lg-4"><span class="fa fa-info-circle" style="margin-right: 10px"></span>Status</td>
                                                                 <td class="col-md-8 col-lg-8">:
                                                                     @if(Auth::user()->username == $transaction->buyer)
                                                                         @if ($transaction->status == 0)
-                                                                            Tunggu Konfirmasi Penjual<br>
+                                                                            Never Seen
                                                                         @elseif ($transaction->status == 1)
-                                                                            Segera bayar <br>
+                                                                            Waiting for Confirmation
                                                                         @elseif ($transaction->status == 2)
-                                                                            Tunggu Konfirmasi pengiriman oleh penjual <br>
+                                                                            Waiting for Payment
                                                                         @elseif ($transaction->status == 3)
-                                                                            Konfirmasi Barang Sudah Sampai <br>
+                                                                            Sending Item
                                                                         @elseif ($transaction->status == 4)
-                                                                            Transaksi Sudah Selesai <br>
+                                                                            Completed
                                                                         @endif
                                                                     @endif
                                                                 </td>
