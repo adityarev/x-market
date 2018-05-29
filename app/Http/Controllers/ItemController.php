@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\DB;
 
 use Xmarket\User;
 use Xmarket\Item;
@@ -171,5 +172,26 @@ class ItemController extends BaseController
             } else 
                 return back();                                                    
         } else return abort(404);
+    }
+
+    public function search(){
+        //var_dump(Input::all());
+
+        echo "<br>";
+        $items = DB::table('items')->select('items.*')
+        ->join('sub_categories','items.sub_category_id','=','sub_categories.id')
+        ->where('items.item_name','like','%'.Input::get('query').'%')
+        ->orWhere('sub_categories.sub_category_name','like','%'.Input::get('query').'%')
+        ->get();
+
+        //Item::join('sub_categories','items.sub_category_id','=','sub_categories.id')->where('items.item_name','like','%'.Input::get('query').'%');
+
+        //var_dump($items);
+
+        /*foreach($items as $item){
+            echo $item->item_name;
+        }*/
+
+        return view('items.search')->with('items',$items);
     }
 }

@@ -33,6 +33,7 @@ Route::get('transactions/store','TransactionController@store');
 Route::post('transactions/{transactionid}', 'TransactionController@update');
 Route::get('transactions/{transactionid}', 'TransactionController@show');
 
+Route::get('items/search','ItemController@search');
 Route::get('items/create', 'ItemController@create');
 Route::post('items/{username}', 'ItemController@store');
 Route::get('items/{username}/{itemname}/edit', 'ItemController@edit');
