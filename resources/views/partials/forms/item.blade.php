@@ -62,13 +62,13 @@
         <div class="col-md-6"></div>
     </div>
 
-    <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
+    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
         <div class="panel panel-primary">
             <div class="panel-body">
-                <div class="col-md-8 col-lg-8" style="height: 200px">
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8" style="height: 200px">
                     <img alt="Item Pic" src="http://pngimg.com/uploads/book/book_PNG2114.png" class="img-responsive" style="height: 100%">
                 </div>
-                <div class="col-md-4 col-lg-4" style="height: 200px">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="height: 200px">
                     <button class="btn btn-danger" id="delete-btn" style="margin: 83px auto">
                         <span class="glyphicon glyphicon-trash" style="margin-right: 5px"></span>
                         Delete
@@ -108,6 +108,28 @@
         </div>
     @endforeach
 
+    <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                {{--Tempat form ga jelas--}}
+                    <fieldset>
+                        <div class="form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <button type="submit" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-plus" style="margin-right: 5px"></span>
+                                    Add Image
+                                </button>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-4">
+                                {!! Form::file('item_image') !!}
+                            </div>
+                        </div>
+                    </fieldset>
+                {!! Form::close() !!}
+            </div>
+        </div>
+    </div>
+
     @foreach($item->images as $image)
         <script>
             $(document).ready( function () {
@@ -120,9 +142,11 @@
 @endif
 
 <div class="form-group">
-    <label class="col-md-4 control-label" ></label>
-    <div class="col-md-6">
-    {!! Form::submit('Save', ['class' => 'btn btn-success']) !!}    
+    <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
+    {!! Form::submit('Save', [
+        'class' => 'btn btn-success',
+        'style' => 'float: left'
+    ]) !!}
     </div>
 </div>
 
