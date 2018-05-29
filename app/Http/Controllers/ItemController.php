@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Response;
 
 use Xmarket\User;
 use Xmarket\Item;
+use Xmarket\Transaction;
+use Xmarket\Notification;
+use Xmarket\ItemImage;
 
 use Session;
 use Image;
@@ -113,18 +116,63 @@ class ItemController extends BaseController
     }
 
     public function buy($username, $itemname){
-        $tmp = str_replace("_"," ",$itemname);
-        $user = User::where('username',$username)->first();
-        $item = $user->item->where('item_name',$tmp)->first();
+        if (Auth::check()){
+            $item = Item::where('item_name',$itemname)->first();            
 
-        echo $item . " purchased by ". $user;
+            $transaction = Transaction::create([
+                'seller' => $item->item_seller,
+                'buyer' => Auth::user()->username,
+                'item_id' => $item->id,                
+            ]);
+
+            Notification::create([
+                'notification_receiver' => $item->item_seller,
+                'notification_title' => "An Item Has Been Purchased",
+                'notification_content' => $item->item_name." has been purchased by ".Auth::user()->username." please confirm this transaction.",
+                'notification_hyperlink' => "transactions/".$transaction->id,
+                'notification_status' => 0,
+            ]);
+
+            return redirect('transactions');
+        } else 
+            return abort(404);
     }
 
-    public function addImage(){
-        echo "Bla";
+    public function manageImages($username,$itemname){
+        if (Auth::check() && Auth::user()->username == $username){
+            $item = Item::where('item_name',$itemname)->first();
+            return view('items.images.index')->with('item',$item);
+        }
+        else 
+            return abort(404);
     }
 
-    public function deleteImage(){
-        echo "del";
+    public function addImage($username,$itemname){
+        if (Auth::check() && Auth::user()->username == $username){
+            $item = Item::where('item_name',$itemname)->first();
+            return view('items.images.create')->with('item',$item);
+        } else 
+            return abort(404);
+    }
+
+    public function storeImage($username,$itemname){
+        if (Auth::check() && Auth::user()->username == $username){
+            if (Input::file('item_image')!=null){                
+                $item = Item::where('item_name',$itemname)->first();
+
+                $path = Storage::putFile('public', Input::file('item_image'));
+                $targetPath = date('Y-m-d-H-m-s').'-'.Input::file('item_image')->getClientOriginalName();            
+                Storage::move($path,'public/item_images/'.$targetPath);                
+
+                ItemImage::create([
+                    'item_id'=>$item->id,
+                    'image_path'=>$targetPath,
+                ]);
+
+                return redirect('items/'.Auth::user()->username.'/'.$item->item_name.'/manageimages');
+            } else 
+                return back();                                                    
+        } else 
+            return abort(404);
     }
 }

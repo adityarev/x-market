@@ -15,38 +15,42 @@ use Session;
 use Image;
 use Storage;
 
-class TransactionController extends Controller
+class TransactionController extends BaseController
 {
     public function index(){
         if (Auth::check()){
-            $buyTransactions = Transaction::where('buyer',Auth::user()->username)->get();
+            $buyTransactions = Transaction::where('buyer',Auth::user()->username)->get();            
 
-            echo "Buy : <br>"; 
-            foreach ($buyTransactions as $transaction){
-                echo $transaction->item->item_name."<br>";
-            }
-
-            $sellTransactions = Transaction::where('seller',Auth::user()->username)->get();
-            echo "Sell : <br>";
-            foreach ($sellTransactions as $transaction){
-                echo $transaction->item->item_name."<br>";
-            }            
+            $sellTransactions = Transaction::where('seller',Auth::user()->username)->get();            
+            
+            return view('transactions.index')->with('buyTransactions',$buyTransactions)->with('sellTransactions',$sellTransactions);
         } else 
             return abort(404);
     }
 
-    public function show(){
-        if (Auth::check){
+    public function show($transactionid){
+        if (Auth::check()){            
+            $transaction = Transaction::find($transactionid);            
 
+            if ($transaction->userSeller->username == Auth::user()->username || $transaction->userBuyer->username == Auth::user()->username)
+                return view('transactions.show')->with('transaction',$transaction);
+            else 
+                return abort(404);
         } else 
             return abort(404);
     }
 
     public function store(){
-
+        
     }
 
-    public function updateStatus(){
-        
+    public function update($transactionid){        
+        $transaction = Transaction::find($transactionid);
+
+        $transaction->status = Input::get('status');
+
+        $transaction->save();
+
+        return redirect('transactions');
     }
 }

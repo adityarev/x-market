@@ -8,7 +8,10 @@ class ItemImage extends Model
 {
     //
 
-    protected $fillable = [];
+    protected $fillable = [
+        'item_id',
+        'image_path',
+    ];
 
     public function item(){
         return $this->belongsTo('Xmarket\Item');

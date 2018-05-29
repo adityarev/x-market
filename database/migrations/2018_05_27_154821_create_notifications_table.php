@@ -17,6 +17,7 @@ class CreateNotificationsTable extends Migration
             $table->increments('id');
             $table->string('notification_receiver',30);
             $table->string('notification_title',30);
+            $table->string('notification_hyperlink',30)->nullable();
             $table->string('notification_content',255);
             $table->boolean('notification_status');
             $table->timestamps();

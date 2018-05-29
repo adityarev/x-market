@@ -13,12 +13,12 @@ class Transaction extends Model
         'status',
     ];
     
-    public function buyer(){
-        return $this->belongsTo('Xmarket\User','buyer');
+    public function userBuyer(){
+        return $this->belongsTo('Xmarket\User','buyer','username');
     }
     
-    public function seller(){
-        return $this->belongsTo('Xmarket\User','seller');
+    public function userSeller(){
+        return $this->belongsTo('Xmarket\User','seller','username');
     }
 
     public function item(){

@@ -45,7 +45,7 @@ class UserController extends BaseController {
         if (Auth::check()){
             Auth::logout();                       
         }
-        return redirect()->back();
+        return redirect('/');
     }
 
     public function register(){

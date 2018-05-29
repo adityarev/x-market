@@ -10,7 +10,7 @@
 |
 */
 Route::get('/', function () {
-    return redirect('category');
+    return redirect('categories');
 });
 Route::get('welcome', function () {
     return view('index');
@@ -29,7 +29,9 @@ Route::get('users/{username}', 'UserController@profileShow');
 Route::get('users/{username}/edit', 'UserController@profileEdit');
 
 Route::get('transactions', 'TransactionController@index');
-Route::get('transactions/{transactionid}', 'TransactionController@index');
+Route::get('transactions/store','TransactionController@store');
+Route::post('transactions/{transactionid}', 'TransactionController@update');
+Route::get('transactions/{transactionid}', 'TransactionController@show');
 
 Route::get('items/create', 'ItemController@create');
 Route::post('items/{username}', 'ItemController@store');
@@ -40,11 +42,13 @@ Route::delete('items/{username}/{itemname}', 'ItemController@destroy');
 Route::get('items/{username}', 'ItemController@index');
 Route::get('items/{username}/{itemname}', 'ItemController@show');
 Route::get('items/{username}/{itemname}/buy', 'ItemController@buy');
-Route::get('items/{username}/{itemname}/addimage', 'ItemController@buy');
+Route::get('items/{username}/{itemname}/manageimages', 'ItemController@manageImages');
+Route::get('items/{username}/{itemname}/addimage', 'ItemController@addImage');
+Route::post('items/{username}/{itemname}/storeimage','ItemController@storeImage');
 
-Route::get('category', 'CategoryController@index');
-Route::get('category/{categoryName}', 'CategoryController@show');
-Route::get('category/{categoryName}/{subCategoryName}', 'CategoryController@subCategoryShow');
+Route::get('categories', 'CategoryController@index');
+Route::get('categories/{categoryName}', 'CategoryController@show');
+Route::get('categories/{categoryName}/{subCategoryName}', 'CategoryController@subCategoryShow');
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
