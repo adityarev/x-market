@@ -45,7 +45,7 @@ class CategoriesTableSeeder extends Seeder
 
         Category::create([
             'id' => 7,
-            'category_name' => 'Buku'
+            'category_name' => 'Souvenir dan Kado'
         ])
 
         Category::create([
@@ -60,7 +60,7 @@ class CategoriesTableSeeder extends Seeder
 
         Category::create([
             'id' => 10,
-            'category_name' => 'Film dan Musik'
+            'category_name' => 'Makanan dan Minuman'
         ])
     }
 }
