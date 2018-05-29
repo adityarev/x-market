@@ -37,16 +37,25 @@ class ItemController extends BaseController
             return abort(404);
     }
 
-    public function store($username){                                
+    public function store(Request $request){                                                
+        if (Input::file('item_image')!=null){            
+            $path = Storage::putFile('public', Input::file('item_image'));
+            $targetPath = date('Y-m-d-H-m-s').'-'.Input::file('item_image')->getClientOriginalName();            
+            Storage::move($path,'public/item_images/'.$targetPath);
+            Input::merge(['item_image' => $targetPath]);
+        } else {
+            Input::merge(['item_image' => null]);
+        }        
         Item::create([
             'item_seller'       => Auth::user()->username,
             'sub_category_id'   => Input::get('sub_category_id'),
             'item_name'         => Input::get('item_name'),
+            'item_image'        => Input::get('item_image'),
             'item_description'  => Input::get('item_description'),
-            'item_price' => Input::get('item_price'),
+            'item_price'        => Input::get('item_price'),
         ]);        
 
-        return redirect('items/'.$username);
+        return redirect('items/'.Auth::user()->username);
     }
 
     public function edit($username, $itemname){        
@@ -61,14 +70,28 @@ class ItemController extends BaseController
     }
 
     public function update($username, $itemname){        
-        $user = User::where('username',$username)->first();
-        $item = $user->item->where('item_name',$tmp)->first();
+        $user = Auth::user();
+        $item = $user->item->where('item_name',$itemname)->first();
+        
+        if (Input::file('item_image')!=null){            
+            $path = Storage::putFile('public', Input::file('item_image'));
+            $targetPath = date('Y-m-d-H-m-s').'-'.Input::file('item_image')->getClientOriginalName();
+            $oldfile = $item->item_image;
+            if($oldfile != null){                
+                Storage::delete('public/item_images/'.$oldfile);
+            }
+            Storage::move($path,'public/item_images/'.$targetPath);
+            Input::merge(['item_image' => $targetPath]);
+        } else {
+            Input::merge(['item_image' => $item->item_image]);
+        }
 
         $item->update([
-            'item_name'         => Input::get('item_name'),
             'sub_category_id'   => Input::get('sub_category_id'),
+            'item_name'         => Input::get('item_name'),
+            'item_image'        => Input::get('item_image'),
             'item_description'  => Input::get('item_description'),
-            'item_price' => Input::get('item_price'),
+            'item_price'        => Input::get('item_price'),
         ]);
 
         return redirect('items/'.$user->username.'/'.$item->item_name);
@@ -82,7 +105,7 @@ class ItemController extends BaseController
 
     public function destroy($username, $itemname){        
         $user = User::where('username',$username)->first();
-        $item = $user->item->where('item_name',$tmp)->first();
+        $item = $user->item->where('item_name',$itemname)->first();
 
         $item->delete();
 

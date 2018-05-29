@@ -26,12 +26,16 @@
                 </div>
                 <div class="panel-body">
                     <div class="col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3" style="margin-bottom: 15px;">
-                        <img alt="Item Pic" src="http://pngimg.com/uploads/book/book_PNG2114.png" class="img-responsive">
+                        @if($item->item_image!=null)
+                        <img alt="User Pic" style="height: 150px; width: 100%" src="{{ asset('storage/item_images/'.$item->item_image) }}" class="img-responsive">
+                        @else
+                            <img alt="Item Pic" src="http://pngimg.com/uploads/book/book_PNG2114.png" class="img-responsive">
+                        @endif
                     </div>
 
                     <div class="row">
                         <div class="col-md-12">
-                            {!! Form::model($item,['url' => '/items/'.$user->username.'/'.$item->item_name, 'method' => 'put', 'class' => 'form-horizontal']) !!}
+                            {!! Form::model($item,['url' => '/items/'.$user->username.'/'.$item->item_name, 'files' => true ,'method' => 'put', 'class' => 'form-horizontal']) !!}
                                 <fieldset>
                                     @include('partials.forms.item')                                    
                                 </fieldset>

@@ -94,9 +94,7 @@ class UserController extends BaseController {
             Input::merge(['user_profile_pict' => $targetPath]);
         } else {            
             Input::merge(['user_profile_pict' => $profile->user_profile_pict]);
-        }
-        /*echo Input::get('user_profile_pict')."<br>";
-        print_r(Input::all());*/
+        }        
 
         $profile->update([            
             'user_profile_pict'=>Input::get('user_profile_pict'),

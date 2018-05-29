@@ -8,6 +8,8 @@ class ItemImage extends Model
 {
     //
 
+    protected $fillable = [];
+
     public function item(){
         return $this->belongsTo('Xmarket\Item');
     }

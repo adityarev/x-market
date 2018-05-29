@@ -31,7 +31,7 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                        {!! Form::open(['url' => '/items/'.Auth::user()->username, 'class' => 'form-horizontal']) !!}
+                        {!! Form::open(['url' => '/items/'.Auth::user()->username, 'files'=>true, 'class' => 'form-horizontal']) !!}
                             <fieldset>
                                 @include('partials.forms.item')                                    
                             </fieldset>
