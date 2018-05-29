@@ -32,5 +32,35 @@ class CategoriesTableSeeder extends Seeder
             'id' => 4,
             'category_name' => 'Entertainment',
         ]);       
+
+        Category::create([
+            'id' => 5,
+            'category_name' => 'Mainan dan Hobi',
+        ])
+
+        Category::create([
+            'id' => 6,
+            'category_name' => 'Rumah Tangga'
+        ])
+
+        Category::create([
+            'id' => 7,
+            'category_name' => 'Buku'
+        ])
+
+        Category::create([
+            'id' => 8,
+            'category_name' => 'Otomotif'
+        ])
+
+        Category::create([
+            'id' => 9,
+            'category_name' => 'Olahraga'
+        ])
+
+        Category::create([
+            'id' => 10,
+            'category_name' => 'Film dan Musik'
+        ])
     }
 }
