@@ -83,19 +83,26 @@
 
                                 @if(Auth::user()->username == $transaction->seller)
                                     {!! Form::model($transaction,['url' => '/transactions/'.$transaction->id]) !!}
-                                    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                                        <select id="subcategory" name="status" class="form-control selectpicker">
-                                            <option value="1"> Terima Pemesanan </option>
-                                            <option value="2"> Konfirmasi Pembayaran </option>
-                                            <option value="3"> Konfirmasi Pengiriman </option>
-                                        </select>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <div class="row">
+                                                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                                    <select id="subcategory" name="status" class="form-control selectpicker pull-right">
+                                                        <option value="1"> Terima Pemesanan </option>
+                                                        <option value="2"> Konfirmasi Pembayaran </option>
+                                                        <option value="3"> Konfirmasi Pengiriman </option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                                    {!! Form::submit('Update Transaction', [
+                                                        'class' => 'btn btn-primary',
+                                                        'style' => 'float : right'
+                                                    ]) !!}
+                                                    {!! Form::close() !!}
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                        {!! Form::submit('Update Transaction', [
-                                            'class' => 'btn btn-success'
-                                        ]) !!}
-                                    </div>
-                                    {!! Form::close() !!}
                                 @endif
                             </div>
                         </div>

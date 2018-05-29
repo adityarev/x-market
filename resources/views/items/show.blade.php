@@ -46,11 +46,14 @@
                                 </tr>
                                 <tr>
                                     <td><span class="fa fa-info-circle" style="margin-right: 10px"></span>Description</td>
-                                    <td></td>                                    
-                                </tr>
-                                <tr>
-                                    <td>{{$item->item_description}}</td>
                                     <td></td>
+                                </tr>
+                                </tr>
+                                <tr class="panel panel-default">
+                                    <div class="panel-body">
+                                        <td>{{$item->item_description}}</td>
+                                        <td></td>
+                                    </div>
                                 </tr>
                                 </tbody>
                             </table>
@@ -67,13 +70,13 @@
 
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="height: 250px; padding: 110px 0px">
+                            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" id="click-left" style="height: 250px; padding: 110px 0px; cursor: pointer">
                                 <span class="glyphicon glyphicon-chevron-left fa-2x pull-left"></span>
                             </div>
-                            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 panel panel-primary" style="height: 250px">
+                            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 panel panel-primary" id="preview" style="height: 250px">
                                 <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/medium/dettol_dettol-fresh-anti-bakteri-sabun-mandi--105-gr-_full01.jpg" class="img-responsive" style="height: 100%; margin: 0px auto">
                             </div>
-                            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="height: 250px; padding: 110px 0px">
+                            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" id="click-right" style="height: 250px; padding: 110px 0px; cursor: pointer">
                                 <span class="glyphicon glyphicon-chevron-right fa-2x pull-right"></span>
                             </div>
                         </div>
@@ -176,6 +179,35 @@
 
         $("#buy-btn").click(function(){
             $("#buy-modal").modal();
+        });
+
+        var i = 0,
+            preview = document.getElementById("preview");
+
+        $("#click-left").click(function () {
+            i = i - 1;
+            if (i < 0) { i = 2; }
+
+            if (i == 0) {
+                preview.innerHTML = '<img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/medium/dettol_dettol-fresh-anti-bakteri-sabun-mandi--105-gr-_full01.jpg" class="img-responsive" style="height: 100%; margin: 0px auto">';
+            } else if (i == 1) {
+                preview.innerHTML = '<img src="https://media-services.digital-rb.com/s3/live-productcatalogue/sys-master/images/h2a/ha4/8834278064158/ID8195105M%20med.png?width=1280&height=1280" class="img-responsive" style="height: 100%; margin: 0px auto">';
+            } else {
+                preview.innerHTML = '<img src="https://ecs7.tokopedia.net/img/product-1/2016/9/27/6278494/6278494_ea2a5dc0-8a7e-4343-8bcc-3df0c8cd1997.jpg" class="img-responsive" style="height: 100%; margin: 0px auto">';
+            }
+        });
+
+        $("#click-right").click(function () {
+            i = i + 1;
+            if (i > 2) { i = 0; }
+
+            if (i == 0) {
+                preview.innerHTML = '<img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/medium/dettol_dettol-fresh-anti-bakteri-sabun-mandi--105-gr-_full01.jpg" class="img-responsive" style="height: 100%; margin: 0px auto">';
+            } else if (i == 1) {
+                preview.innerHTML = '<img src="https://media-services.digital-rb.com/s3/live-productcatalogue/sys-master/images/h2a/ha4/8834278064158/ID8195105M%20med.png?width=1280&height=1280" class="img-responsive" style="height: 100%; margin: 0px auto">';
+            } else {
+                preview.innerHTML = '<img src="https://ecs7.tokopedia.net/img/product-1/2016/9/27/6278494/6278494_ea2a5dc0-8a7e-4343-8bcc-3df0c8cd1997.jpg" class="img-responsive" style="height: 100%; margin: 0px auto">';
+            }
         });
     });
 
