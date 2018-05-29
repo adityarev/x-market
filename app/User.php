@@ -32,4 +32,12 @@ class User extends Authenticatable
     public function notifications(){
         return $this->hasMany('Xmarket\Notification','notification_receiver','username');
     }
+
+    public function buysItems(){
+        return $this->hasMany('Xmarket\Transaction','buyer');
+    }
+
+    public function sellsItems(){
+        return $this->hasMany('Xmarket\Transaction','seller');
+    }
 }

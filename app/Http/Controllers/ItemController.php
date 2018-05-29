@@ -31,9 +31,10 @@ class ItemController extends BaseController
     }
 
     public function create(){
-        //$user = User::where('username',$username)->first();
-
-        return view('items.create');
+        if (Auth::check())
+            return view('items.create');
+        else 
+            return abort(404);
     }
 
     public function store($username){                                
@@ -43,20 +44,23 @@ class ItemController extends BaseController
             'item_name'         => Input::get('item_name'),
             'item_description'  => Input::get('item_description'),
             'item_price' => Input::get('item_price'),
-        ]);
+        ]);        
 
         return redirect('items/'.$username);
     }
 
     public function edit($username, $itemname){        
-        $user = User::where('username',$username)->first();
-        $item = $user->item->where('item_name',$itemname)->first();
+        if (Auth::check() && Auth::user()->username == $username){
+            $user = User::where('username',$username)->first();
+            $item = $user->item->where('item_name',$itemname)->first();
 
-        return view('items.edit')->with('user',$user)->with('item',$item);
+            return view('items.edit')->with('user',$user)->with('item',$item);
+        } 
+        else 
+            return abort(404);
     }
 
-    public function update($username, $itemname){
-        $tmp = str_replace("_"," ",$itemname);
+    public function update($username, $itemname){        
         $user = User::where('username',$username)->first();
         $item = $user->item->where('item_name',$tmp)->first();
 
@@ -70,15 +74,13 @@ class ItemController extends BaseController
         return redirect('items/'.$user->username.'/'.$item->item_name);
     }
 
-    public function delete($username, $itemname){
-        $tmp = str_replace("_"," ",$itemname);
+    public function delete($username, $itemname){        
         $user = User::where('username',$username)->first();
-        $item = $user->item->where('item_name',$tmp)->first();
+        $item = $user->item->where('item_name',$itemname)->first();
         return view('items.delete')->with('user',$user)->with('item',$item);
     }
 
-    public function destroy($username, $itemname){
-        $tmp = str_replace("_"," ",$itemname);
+    public function destroy($username, $itemname){        
         $user = User::where('username',$username)->first();
         $item = $user->item->where('item_name',$tmp)->first();
 

@@ -27,7 +27,11 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-4 col-lg-4 col-md-offset-1 col-lg-offset-1" align="center">
-                            <img alt="User Pic" src="https://media-services.digital-rb.com/s3/live-productcatalogue/sys-master/images/h3d/h49/8833674084382/image001.png?width=260&height=260" class="img-responsive">
+                            @if($item->item_image != null)
+                                <img alt="User Pic" src="{{ asset('storage/item_images/'.$item->item_image) }}" class="img-responsive">
+                            @else
+                                <img alt="User Pic" src="https://media-services.digital-rb.com/s3/live-productcatalogue/sys-master/images/h3d/h49/8833674084382/image001.png?width=260&height=260" class="img-responsive">
+                            @endif
                         </div>
                         <div class="col-md-6 col-lg- toppad">
                             <table class="table table-item-information">
@@ -42,7 +46,11 @@
                                 </tr>
                                 <tr>
                                     <td><span class="fa fa-info-circle" style="margin-right: 10px"></span>Description</td>
+                                    <td></td>                                    
+                                </tr>
+                                <tr>
                                     <td>{{$item->item_description}}</td>
+                                    <td></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -51,7 +59,7 @@
 
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <h4>
-                            <a href="#" class="typewrite" data-period="2000" data-type='[ "Preview" ]' style="text-decoration: none">
+                            <a style="position: relative; left: 50px;" href="#" class="typewrite" data-period="2000" data-type='[ "Preview" ]' style="text-decoration: none">
                                 <span class="wrap"></span>
                             </a>
                         </h4>
@@ -120,8 +128,8 @@
                         <div class="row">
                             <div class="col-md-3 col-lg-3"></div>
                             <div class="col-md-9 col-lg-9">
-                                <button class="btn btn-warning" id="buy-btn">
-                                    <span class="glyphicon glyphicon-shopping-cart" style="margin-right: 5px;"></span>
+                                <button class="btn btn-warning" id="buy-btn" style="position:relative; right:60px; float: right;">
+                                    <span class="glyphicon glyphicon-shopping-cart"></span>
                                     Buy
                                 </button>
 
@@ -150,12 +158,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-
-                                <button class="btn btn-danger">
-                                    <span class="glyphicon glyphicon-remove" style="margin-right: 5px;"></span>
-                                    Cancel
-                                </button>
+                                </div>                                
                             </div>
                         </div>
                     @endif

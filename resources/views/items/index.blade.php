@@ -19,8 +19,12 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 toppad" >
                                     <div class="panel panel-default">
                                         <div class="panel-body">
-                                            <div class="col-md-4 col-lg-4" id="{{ $item->id }}" style="padding:0px; opacity: 0.4">
+                                            <div class="col-md-4 col-lg-4" id="{{ $item->id }}" style="padding:0px; opacity: 0.4">                                            
+                                            @if($item->item_image != null)
+                                                <img alt="User Pic" src="{{ asset('storage/item_images/'.$item->item_image) }}" class="img-responsive">
+                                            @else
                                                 <img alt="300x200" style="width: 100%" src="http://placehold.it/200x150">
+                                            @endif                                                
                                             </div>
                                             <div class="col-md-4 col-lg-4 col-md-offset-1 col-lg-offset-1" style="padding:0px">
                                                 @if(Auth::check() && Auth::user()->username == $user->username)

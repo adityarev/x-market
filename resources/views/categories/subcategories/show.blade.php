@@ -21,7 +21,11 @@
                                 <div class="panel panel-default">
                                     <div class="panel-body">
                                         <div class="col-md-12 col-lg-12" id="{{ $item->id }}" style="padding:0px; opacity: 0.4">
-                                            <img alt="300x200" style="width: 100%" src="http://placehold.it/200x150">
+                                        @if($item->item_image != null)
+                                            <img alt="User Pic" style="height: 150px; width: 100%" src="{{ asset('storage/item_images/'.$item->item_image) }}" class="img-responsive">
+                                        @else
+                                            <img alt="300x200" style="height: 150px; width: 100%" src="http://placehold.it/200x150">
+                                        @endif
                                         </div>
                                         <div class="col-md-12 col-lg-12" style="padding:0px">
                                             <a href="{{url('items/'.$item->user->username.'/'.$item->item_name)}}">

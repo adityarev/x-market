@@ -48,5 +48,51 @@ class ItemsTableSeeder extends Seeder
             'item_price' => 405000,
             'item_rating' => 4.75,
         ]);
+
+        Item::create([
+            'sub_category_id'   => 8,
+            'item_seller'       => 'sangPemeliharaKuda',
+            'item_name'         => 'Buku Tata Cara Merawat Kuda Putih',
+            'item_description'  => 'Perawatan Kuda Yang Baik',
+            'item_price' => 100,
+            'item_rating' => 4.75,
+        ]);
+
+        Item::create([
+            'sub_category_id'   => 8,
+            'item_seller'       => 'sangPemeliharaKuda',
+            'item_name'         => 'Buku Tata Cara Merawat Kuda Coklat',
+            'item_description'  => 'Perawatan Kuda Yang Baik',
+            'item_price' => 200,
+            'item_rating' => 4.75,
+        ]);
+
+        Item::create([
+            'sub_category_id'   => 8,
+            'item_seller'       => 'sangPemeliharaKuda',
+            'item_name'         => 'Buku Tata Cara Merawat Kuda Hitam',
+            'item_description'  => 'Perawatan Kuda Yang Baik',
+            'item_price' => 300,
+            'item_rating' => 4.75,
+        ]);
+
+        Item::create([
+            'sub_category_id'   => 8,
+            'item_seller'       => 'sangPemeliharaKuda',
+            'item_name'         => 'Buku Tata Cara Merawat Kuda Terbang',
+            'item_description'  => 'Perawatan Kuda Yang Baik',
+            'item_price' => 400,
+            'item_rating' => 4.75,
+        ]);
+
+        Item::create([
+            'sub_category_id'   => 8,
+            'item_seller'       => 'sangPemeliharaKuda',
+            'item_image'        => 'fp.png',
+            'item_name'         => 'Buku Tata Cara Merawat Kuda Lam Tekanan FP',
+            'item_description'  => 'Tata Cara Pemeliharaan Semangat Dalam Tekanan FP',
+            'item_price' => 9999999,
+            'item_rating' => 4.99,
+        ]);
     }
 }

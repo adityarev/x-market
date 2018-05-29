@@ -17,6 +17,7 @@ class CreateItemsTable extends Migration
             $table->increments('id');
             $table->integer('sub_category_id');
             $table->string('item_seller',30);
+            $table->string('item_image',255)->nullable();
             $table->string('item_name',50);            
             $table->string('item_description',255);
             $table->integer('item_price');
